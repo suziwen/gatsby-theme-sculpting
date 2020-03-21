@@ -21,4 +21,24 @@ export default {
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  // base theme values...
+  styles: {
+    // the keys used here reference elements in MDX
+    h1: {
+      // the style object for each element
+      // can reference other values in the theme
+      fontFamily: "heading",
+      fontWeight: "heading",
+      lineHeight: "heading",
+      marginTop: 0,
+      marginBottom: 3,
+    },
+    a: {
+      color: "primary",
+      ":hover, :focus": {
+        color: "secondary",
+      },
+    },
+    // more styles can be added as needed
+  },
 }
