@@ -1,3 +1,3 @@
 module.exports = {
-  plugins: [{ resolve: `gatsby-theme-minimal`, options: {} }],
+  plugins: [{ resolve: `@suziwen/gatsby-theme-stone-sculpture`, options: {} }],
 }
