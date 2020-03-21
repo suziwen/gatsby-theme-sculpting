@@ -11,13 +11,13 @@ const getRandomInt = function (min, max) {
 
 exports.createPages = ({ graphql, actions }, pluginOptions) => {
   const { createPage, createRedirect } = actions
-  const contentPath =  pluginOptions.contentPath || 'post';
+  const contentPath =  pluginOptions.contentPath || 'posts';
   const pageSize = pluginOptions.pageSize ||  8;
 
   return new Promise((resolve, reject) => {
-    const blogPostTemplate = path.resolve(`src/templates/template-blog-post.js`)
-    const paginatedPostsTemplate = path.resolve(`src/templates/template-blog-list.js`)
-    const tagTemplate = path.resolve(`src/templates/tags.js`)
+    const blogPostTemplate = require.resolve(`./src/templates/template-blog-post.js`)
+    const paginatedPostsTemplate = require.resolve(`./src/templates/template-blog-list.js`)
+    const tagTemplate = require.resolve(`./src/templates/tags.js`)
     resolve(
       graphql(
         `
