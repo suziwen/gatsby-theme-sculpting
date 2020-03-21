@@ -11,8 +11,8 @@ const getRandomInt = function (min, max) {
 
 exports.createPages = ({ graphql, actions }, pluginOptions) => {
   const { createPage, createRedirect } = actions
-  const contentPath =  pluginOptions.contentPath or 'post';
-  const pageSize = pluginOptions.pageSize or  8;
+  const contentPath =  pluginOptions.contentPath || 'post';
+  const pageSize = pluginOptions.pageSize ||  8;
 
   return new Promise((resolve, reject) => {
     const blogPostTemplate = path.resolve(`src/templates/template-blog-post.js`)
