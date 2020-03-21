@@ -16,7 +16,7 @@
     "gatsby-plugin-theme-ui": "^0.3.0",
     "gatsby-source-filesystem": "^2.2.1",
     "gatsby-transformer-sharp": "^2.4.1",
-    "gatsby-transformer-xsjzip": "^0.1.0",
+    "gatsby-transformer-xsjzip": "^1.0.2",
     "gatsby-transformer-yaml": "^2.3.0",
     "lodash": "^4.17.15",
     "lodash.debounce": "^4.0.8",

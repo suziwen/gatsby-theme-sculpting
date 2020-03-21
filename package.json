@@ -2,7 +2,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "yarn workspace example build"
+    "build": "yarn workspace example build",
+    "clean": "yarn workspace example clean",
+    "develop": "yarn workspace example develop"
   },
   "workspaces": [
     "theme",
