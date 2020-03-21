@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "gatsby-plugin-theme-ui": "^0.3.0",
+    "gatsby-transformer-xsjzip": "^0.1.0",
     "theme-ui": "^0.3.1"
   }
 }
