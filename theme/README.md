@@ -1,4 +1,4 @@
-# The smallest possible Gatsby theme
+# The Stone Sculpture Gatsby theme
 
 ## Quick Start
 
@@ -6,8 +6,8 @@
 mkdir my-site
 cd my-site
 yarn init
-# install gatsby-theme-minimal and it's dependencies
-yarn add gatsby react react-dom gatsby-theme-minimal
+# install gatsby-theme-stone-sculpture and it's dependencies
+yarn add gatsby react react-dom gatsby-theme-stone-sculpture
 ```
 
 Then add the theme to your `gatsby-config.js`. We'll use the long form
@@ -17,7 +17,7 @@ here for education purposes.
 module.exports = {
   plugins: [
     {
-      resolve: "gatsby-theme-minimal",
+      resolve: "gatsby-theme-stone-sculpture",
       options: {},
     },
   ],
