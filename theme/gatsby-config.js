@@ -30,6 +30,7 @@ module.exports = options => {
       },
       `gatsby-transformer-sharp`,
       `gatsby-plugin-sharp`,
+      `gatsby-plugin-mdx`,
       "gatsby-transformer-xsjzip"
     ]
   }

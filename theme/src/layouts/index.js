@@ -1,45 +1,64 @@
-import React from "react"
+/** @jsx jsx */
+import React, { useState, useRef } from "react"
 import { navigate, PageRenderer } from "gatsby"
 import SiteMetadata from "../components/site-metadata"
 import Transition from "../components/transition"
 import ContextConsumer, { ContextProviderComponent } from "../components/context"
 
+import { Global } from '@emotion/core'
+import { Styled, Container, jsx, useThemeUI } from 'theme-ui'
 
-class DefaultLayout extends React.PureComponent {
-  constructor() {
-    super()
+import Header from './header'
+import Sidenav from './sidenav'
+
+export default ({pageContext, location, children}) => {
+  const { theme: { colors = {} } } = useThemeUI()
+  const [menuOpen, setMenuOpen] = useState(false)
+  const nav = useRef(null)
+  const bodyStyles = {
+    body: {
+      margin: 0,
+      color: colors.text,
+      backgroundColor: colors.background
+    }
   }
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  render() {
-    const pageContext = this.props.pageContext
-    const props = this.props
-    return (
-    <ContextProviderComponent>
-      <ContextConsumer>
-        {({data, set})=>{
-          return (
-            <div>
-              <SiteMetadata pathname={props.location.pathname} />
+  return (
+    <Styled.root>
+      <Global styles={bodyStyles} />
+      <SiteMetadata pathname={location.pathname} />
+      <ContextProviderComponent>
+        <ContextConsumer>
+          {({data, set})=>{
+            return (
               <div
-                className={`main-body`}
+                ref={nav}
+                sx={{
+                  display: ['block', 'flex'],
+                  mx: -3,
+                }}
               >
-                  <Transition location={props.location}>
-                    {props.children}
+                <Sidenav
+                  open={menuOpen}
+                  sx={{ display: [null, 'block'] }}
+                  onFocus={() => setMenuOpen(true)}
+                  onBlur={() => setMenuOpen(false)}
+                  onClick={() => setMenuOpen(false)}
+                />
+                <div
+                  sx={{
+                    overflow: 'hidden',
+                    px: 3,
+                  }}
+                >
+                  <Transition location={location}>
+                    {children}
                   </Transition>
+                </div>
               </div>
-            </div>
-          )
-        }}
-      </ContextConsumer>
-    </ContextProviderComponent>
-    )
-  }
+            )
+          }}
+        </ContextConsumer>
+      </ContextProviderComponent>
+    </Styled.root>
+  )
 }
-
-export default DefaultLayout
