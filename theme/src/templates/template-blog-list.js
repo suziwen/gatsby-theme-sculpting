@@ -34,7 +34,7 @@ class BlogPostsIndex extends React.Component {
                 <br/>
                 <Link
                   to={node.slug}
-                />
+                >{node.title}</Link>
               </div>
             ))}
             <Pagination context={this.props.pageContext} />

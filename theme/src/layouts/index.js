@@ -30,31 +30,33 @@ export default ({pageContext, location, children}) => {
         <ContextConsumer>
           {({data, set})=>{
             return (
-              <div
-                ref={nav}
-                sx={{
-                  display: ['block', 'flex'],
-                  mx: -3,
-                }}
-              >
-                <Sidenav
-                  open={menuOpen}
-                  sx={{ display: [null, 'block'] }}
-                  onFocus={() => setMenuOpen(true)}
-                  onBlur={() => setMenuOpen(false)}
-                  onClick={() => setMenuOpen(false)}
-                />
+              <>
+                <Header nav={nav} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
                 <div
+                  ref={nav}
                   sx={{
-                    overflow: 'hidden',
-                    px: 3,
+                    display: ['block', 'flex'],
                   }}
                 >
-                  <Transition location={location}>
-                    {children}
-                  </Transition>
+                  <Sidenav
+                    open={menuOpen}
+                    sx={{ display: [null, 'block'] }}
+                    onFocus={() => setMenuOpen(true)}
+                    onBlur={() => setMenuOpen(false)}
+                    onClick={() => setMenuOpen(false)}
+                  />
+                  <div
+                    sx={{
+                      overflow: 'hidden',
+                      px: 3,
+                    }}
+                  >
+                    <Transition location={location}>
+                      {children}
+                    </Transition>
+                  </div>
                 </div>
-              </div>
+              </>
             )
           }}
         </ContextConsumer>

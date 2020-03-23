@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Header, Container, Flex, useColorMode } from 'theme-ui'
+import { jsx, Container, Flex, useColorMode } from 'theme-ui'
 import { MDXProvider } from '@mdx-js/react'
 
 import MenuButton from './menu-button'
@@ -39,7 +39,6 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
   }
 
   return (
-    <Header>
       <Container>
         <Flex sx={{ justifyContent: 'space-between' }}>
           <Flex sx={styles}>
@@ -64,6 +63,5 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
           </Flex>
         </Flex>
       </Container>
-    </Header>
   )
 }
