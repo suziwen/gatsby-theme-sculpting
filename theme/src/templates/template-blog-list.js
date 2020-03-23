@@ -85,9 +85,6 @@ export const pageQuery = graphql`
               }
             }
           }
-          meta {
-            title
-          }
         }
       }
     }
