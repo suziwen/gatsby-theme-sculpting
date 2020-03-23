@@ -1,5 +1,12 @@
+const fs = require('fs')
+
 module.exports = options => {
-  const { mdx = true, contentPath = 'posts' } = options
+  let { mdx = true, contentPath = 'posts' , docType='posts'} = options
+  if(!fs.existsSync(contentPath)) {
+    // 如果用户未创建 contentPath 目录,就使用主题里默认的 posts
+    contentPath = `${__dirname}/posts`
+  }
+
   return {
     siteMetadata: {
       title: "小书匠",
@@ -25,7 +32,7 @@ module.exports = options => {
         resolve: `gatsby-source-filesystem`,
         options: {
           path: contentPath,
-          name: contentPath
+          name: docType
         }
       },
       `gatsby-transformer-sharp`,

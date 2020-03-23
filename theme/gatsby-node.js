@@ -11,7 +11,7 @@ const getRandomInt = function (min, max) {
 
 exports.createPages = ({ graphql, actions }, pluginOptions) => {
   const { createPage, createRedirect } = actions
-  const contentPath =  pluginOptions.contentPath || 'posts';
+  const docType =  pluginOptions.docType || 'posts';
   const pageSize = pluginOptions.pageSize ||  8;
 
   return new Promise((resolve, reject) => {
@@ -52,8 +52,8 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
         }
         const posts = result.data.allStoryWriterMarkdown.edges
         const blogPosts = _.filter(result.data.allStoryWriterMarkdown.edges, edge=>{
-          const docType = _.get(edge, `node.docType`)
-          if (docType ===  contentPath) {
+          const _docType = _.get(edge, `node.docType`)
+          if (_docType ===  docType) {
             return edge
           }
           return undefined
@@ -116,7 +116,6 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
           if (index > 0) {
             path = `/page/${index+1}/`
           }
-          console.log(`limit*skipt::::${pageSize}*${pageSize*index}` )
           createPage({
               path: path,
               component: paginatedPostsTemplate,
@@ -124,7 +123,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
                   {
                     limit: pageSize,
                     skip: index * pageSize,
-                    docType: contentPath,
+                    docType: docType,
                     numPages: Math.ceil(blogPosts.length / pageSize),
                     currentPage: index + 1,
                   }
