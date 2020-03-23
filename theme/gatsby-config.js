@@ -7,6 +7,12 @@ module.exports = options => {
       description: `一款让你爱不释手的写作软件`
     },
     plugins: [
+      {
+        resolve: `gatsby-plugin-layout`,
+        options: {
+          component: require.resolve(`./src/layouts/index.js`)
+        }
+      },
       "gatsby-plugin-theme-ui",
       {
         resolve: `gatsby-source-filesystem`,
