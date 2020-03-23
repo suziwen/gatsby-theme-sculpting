@@ -116,6 +116,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
           if (index > 0) {
             path = `/page/${index+1}/`
           }
+          console.log(`limit*skipt::::${pageSize}*${pageSize*index}` )
           createPage({
               path: path,
               component: paginatedPostsTemplate,
@@ -123,6 +124,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
                   {
                     limit: pageSize,
                     skip: index * pageSize,
+                    docType: contentPath,
                     numPages: Math.ceil(blogPosts.length / pageSize),
                     currentPage: index + 1,
                   }

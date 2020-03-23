@@ -30,7 +30,7 @@ class BlogPostsIndex extends React.Component {
           >
             {posts.map(({ node }) => (
               <div key={node.slug}>
-                <h1>node.title</h1>
+                <h1>{node.title}</h1>
                 <br/>
                 <Link
                   to={node.slug}
@@ -47,7 +47,7 @@ class BlogPostsIndex extends React.Component {
 export default BlogPostsIndex
 
 export const pageQuery = graphql`
-  query IndexQuery($limit: Int, $skip: Int) {
+  query IndexQuery($docType: String, $limit: Int, $skip: Int) {
     site {
       siteMetadata {
         title
@@ -60,7 +60,7 @@ export const pageQuery = graphql`
       skip: $skip
       sort: { fields: [updateDate, slug], order: DESC }
       filter: {
-        docType: {eq: "blogs"}
+        docType: {eq: $docType}
       }
     ) {
       edges {

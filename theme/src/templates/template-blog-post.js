@@ -3,7 +3,7 @@ import Helmet from "react-helmet"
 import { Link, graphql } from "gatsby"
 import {MdArrowForward, MdArrowBack} from "react-icons/md"
 import Img from "gatsby-image"
-import TagsSection from "../compoments/tags-section"
+import TagsSection from "../components/tags-section"
 
 class BlogPostTemplate extends React.Component {
   render() {
