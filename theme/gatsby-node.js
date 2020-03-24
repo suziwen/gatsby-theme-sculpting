@@ -13,6 +13,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
   const { createPage, createRedirect } = actions
   const docType =  pluginOptions.docType || 'posts';
   const pageSize = pluginOptions.pageSize ||  8;
+  const basePath = pluginOptions.basePath || '/';
 
   return new Promise((resolve, reject) => {
     const blogPostTemplate = require.resolve(`./src/templates/template-blog-post.js`)
@@ -98,8 +99,11 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
           let prev =
             index === blogPosts.length - 1 ? null : blogPosts[index + 1].node
           prev = wrapperNode(prev);
+          let slug = basePath + '/' + post.node.slug;
+          // 删除多个重复的 / 符号
+          slug = slug.replace(/\/+/g, `/`)
           createPage({
-            path: post.node.slug,
+            path: slug,
             component: blogPostTemplate,
             context: {
               slug: post.node.slug,
