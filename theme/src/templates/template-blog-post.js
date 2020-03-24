@@ -23,83 +23,75 @@ class BlogPostTemplate extends React.Component {
     const postHtmlAndCss = `<style>${post.customCss}</style>\n${post.html}`
 
     return (
-      <div>
-          <main>
-            {/* Add long list of social meta tags */}
-            <Helmet>
-              <title>{post.title}</title>
-              <meta
-                name="description"
-                content={
-                  post.excerpt
-                }
-              />
-
-              <meta property="og:description" content={post.excerpt} />
-              <meta property="og:title" content={post.title} />
-              <meta property="og:type" content="article" />
-              <meta
-                name="article:published_time"
-                content={post.createDate}
-              />
-            </Helmet>
-            <section
-            >
-              <div
-              >
-                <BioLine>
-                  {post.updateDate}
-                </BioLine>
-              </div>
-            </section>
-            <h1
-            >
-              {post.title}
-            </h1>
-            <section className="post-body">
-              <BaseStyles>
-                <div dangerouslySetInnerHTML={{ __html: postHtmlAndCss }} />
-              </BaseStyles>
-            </section>
-            <TagsSection
-              tags={post.tags}
+        <div>
+          {/* Add long list of social meta tags */}
+          <Helmet>
+            <title>{post.title}</title>
+            <meta
+              name="description"
+              content={
+                post.excerpt
+              }
             />
-          </main>
-        <div
-        >
-          <div>
-            <div
-            >
-              <div
-              >
-                {prev && (
-                  <Link to={prev.slug}>
-                    <h4>Previous</h4>
-                    <span
-                    >
-                      <MdArrowBack style={{ verticalAlign: `sub` }} />
-                      {prev.title}
-                    </span>
-                  </Link>
-                )}
-              </div>
-              <div
-              >
-                {next && (
-                  <Link to={next.slug}>
-                    <h4>Next</h4>
-                    <span
-                    >
-                      {next.title}
-                      <MdArrowForward style={{ verticalAlign: `sub` }} />
-                    </span>
-                  </Link>
-                )}
-              </div>
+
+            <meta property="og:description" content={post.excerpt} />
+            <meta property="og:title" content={post.title} />
+            <meta property="og:type" content="article" />
+            <meta
+              name="article:published_time"
+              content={post.createDate}
+            />
+          </Helmet>
+          <section
+          >
+            <div>
+              <BioLine>
+                {post.updateDate}
+              </BioLine>
+            </div>
+          </section>
+          <h1
+          >
+            {post.title}
+          </h1>
+          <section className="post-body">
+            <BaseStyles>
+              <div dangerouslySetInnerHTML={{ __html: postHtmlAndCss }} />
+            </BaseStyles>
+          </section>
+          <TagsSection
+            tags={post.tags}
+          />
+          <div sx={{
+            display: 'flex'
+          }}>
+            <div sx={{flex: 1, textAlign: `left`}}>
+              {prev && (
+                <Link to={prev.slug}>
+                  <h4>Previous</h4>
+                  <span
+                  >
+                    <MdArrowBack style={{ verticalAlign: `sub` }} />
+                    {prev.title}
+                  </span>
+                </Link>
+              )}
+            </div>
+            <div sx={{flex: 1, textAlign: `right`}}>
+              {next && (
+                <Link to={next.slug}>
+                  <h4>Next</h4>
+                  <span
+                  >
+                    {next.title}
+                    <MdArrowForward style={{ verticalAlign: `sub` }} />
+                  </span>
+                </Link>
+              )}
             </div>
           </div>
         </div>
-      </div>
+
     )
   }
 }

@@ -121,17 +121,6 @@ export default {
         color: 'secondary',
       },
     },
-    pre: {
-      fontFamily: 'monospace',
-      fontSize: 1,
-      p: 3,
-      color: 'text',
-      bg: 'muted',
-      overflow: 'auto',
-      code: {
-        color: 'inherit',
-      },
-    },
     code: {
       fontFamily: 'monospace',
       color: 'secondary',
