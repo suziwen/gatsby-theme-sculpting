@@ -18,7 +18,8 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
   return new Promise((resolve, reject) => {
     const blogPostTemplate = require.resolve(`./src/templates/template-blog-post.js`)
     const paginatedPostsTemplate = require.resolve(`./src/templates/template-blog-list.js`)
-    const tagTemplate = require.resolve(`./src/templates/tags.js`)
+    const tagTemplate = require.resolve(`./src/templates/template-tag.js`)
+    const tagsTemplate = require.resolve(`./src/templates/template-tags.js`)
     resolve(
       graphql(
         `
@@ -61,27 +62,40 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
         })
 
           // Tag pages:
-          let tags = [];
+          let taginfo = {};
           // Iterate through each post, putting all found tags into `tags`
           blogPosts.forEach(edge => {
               if (_.get(edge, "node.tags")) {
-                  tags = tags.concat(edge.node.tags);
+                edge.node.tags.forEach((tag)=>{
+                  tag = tag.trim()
+                  if (taginfo[tag]) {
+                    taginfo[tag]++
+                  } else {
+                    taginfo[tag] = 1
+                  }
+                })
               }
           });
-          // Eliminate duplicate tags
-          tags = _.uniq(tags);
-
           // Make tag pages
-          tags.forEach(tag => {
+          Object.keys(taginfo).forEach(tag => {
+              const tagSlug = `/tags/${_.kebabCase(tag)}/`
+              const count = taginfo[tag]
+              taginfo[tag] = {slug: tagSlug, count: count}
               createPage({
-                  path: `/tags/${_.kebabCase(tag)}/`,
+                  path: tagSlug,
                   component: tagTemplate,
                   context: {
                       tag,
                   },
               });
           });
-        
+        createPage({
+          path: `/tags/`,
+          component: tagsTemplate,
+          context: {
+            allTags: taginfo
+          }
+        })
 
         blogPosts.forEach((post, index) => {
           const wrapperNode = (node)=>{
