@@ -5,7 +5,6 @@ exports.onRenderBody = ({ setHeadComponents, setPostBodyComponents }, pluginOpti
   let output = [
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "libs/zoom/zoom.css"}/>,
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "css/story-writer-markdown-default.css"}/>,
-    <link rel="stylesheet" type="text/css" href={withPrefix('/') + "css/story-writer-markdown-code-solarized-light.css"}/>,
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "css/story-writer-markdown-components.css"}/>,
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "fonts/Webfonts/xsj/stylesheet.css"}/>,
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "xsjfonts/fontstyles/zh.css"}/>,

@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx, BaseStyles } from "theme-ui"
 import React from "react"
 import Helmet from "react-helmet"
 import { Link, graphql } from "gatsby"
@@ -56,7 +58,9 @@ class BlogPostTemplate extends React.Component {
               {post.title}
             </h1>
             <section className="post-body">
-              <div dangerouslySetInnerHTML={{ __html: postHtmlAndCss }} />
+              <BaseStyles>
+                <div dangerouslySetInnerHTML={{ __html: postHtmlAndCss }} />
+              </BaseStyles>
             </section>
             <TagsSection
               tags={post.tags}
