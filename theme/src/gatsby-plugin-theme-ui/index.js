@@ -175,6 +175,7 @@ export default {
     },
     '.hljs': {
       color: 'text',
+      bg: 'muted',
       [['.hljs-subst']]: {
         color: 'text'
       },
