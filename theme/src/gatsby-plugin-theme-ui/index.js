@@ -122,7 +122,6 @@ export default {
       },
     },
     pre: {
-      variant: 'prism',
       fontFamily: 'monospace',
       fontSize: 1,
       p: 3,

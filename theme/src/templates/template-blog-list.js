@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx, BaseStyles } from "theme-ui"
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Helmet from "react-helmet"
@@ -18,28 +20,27 @@ class BlogPostsIndex extends React.Component {
     const currentPage = get(this, "props.pageContext.currentPage");
 
     return (
-        <main
-          id={`reach-skip-nav`}
-        >
-          <Helmet bodyAttributes={{
-            class: "roadbike-blog-list"
-          }}>
-            <title>博客</title>
-          </Helmet>
-          <div
+          <main
           >
-            {posts.map(({ node }) => (
-              <div key={node.slug}>
-                <h1>{node.title}</h1>
-                <br/>
-                <Link
-                  to={node.slug}
-                >{node.title}</Link>
-              </div>
-            ))}
-            <Pagination context={this.props.pageContext} />
-          </div>
-        </main>
+            <Helmet bodyAttributes={{
+              class: "roadbike-blog-list"
+            }}>
+              <title>博客</title>
+            </Helmet>
+            <div
+            >
+              {posts.map(({ node }) => (
+                <div key={node.slug}>
+                  <h1>{node.title}</h1>
+                  <br/>
+                  <Link
+                    to={node.slug}
+                  >{node.title}</Link>
+                </div>
+              ))}
+              <Pagination context={this.props.pageContext} />
+            </div>
+          </main>
     )
   }
 }

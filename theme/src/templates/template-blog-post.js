@@ -24,8 +24,7 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <div>
-        <div className="post" css={{ paddingBottom: `0` }}>
-          <main id={`reach-skip-nav`}>
+          <main>
             {/* Add long list of social meta tags */}
             <Helmet>
               <title>{post.title}</title>
@@ -66,7 +65,6 @@ class BlogPostTemplate extends React.Component {
               tags={post.tags}
             />
           </main>
-        </div>
         <div
         >
           <div>

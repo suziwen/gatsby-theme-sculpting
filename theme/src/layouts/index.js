@@ -40,7 +40,9 @@ export default ({pageContext, location, children}) => {
                 >
                   <Sidenav
                     open={menuOpen}
-                    sx={{ display: [null, 'block'] }}
+                    sx={{ 
+                      display: [null, 'block'],
+                    }}
                     onFocus={() => setMenuOpen(true)}
                     onBlur={() => setMenuOpen(false)}
                     onClick={() => setMenuOpen(false)}
@@ -48,11 +50,14 @@ export default ({pageContext, location, children}) => {
                   <div
                     sx={{
                       overflow: 'hidden',
+                      flex: 1,
                       px: 3,
                     }}
                   >
                     <Transition location={location}>
-                      {children}
+                      <div sx={{ p: [0, 0, 5], mx: 'auto', my: 0, maxWidth: '1000px' }}>
+                        {children}
+                      </div>
                     </Transition>
                   </div>
                 </div>
