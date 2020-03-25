@@ -1,4 +1,16 @@
 const fs = require('fs')
+const nodejieba = require("nodejieba")
+
+const tokenizerFn = function(str){
+  let results = []
+  const enStrs = str.split(/\W+/)
+  results = results.concat(enStrs)
+  const zhStr = str.replace(/[\w\s\,\.\!\?\:]+/gm, ',')
+  const zhStrs = nodejieba.cutForSearch(zhStr)
+  console.log(zhStrs)
+  results = results.concat(zhStrs)
+  return results
+}
 
 module.exports = options => {
   let { mdx = true, contentPath = 'posts' , docType='posts'} = options
@@ -14,6 +26,44 @@ module.exports = options => {
       description: `一款让你爱不释手的写作软件`
     },
     plugins: [
+      {
+        resolve: `gatsby-plugin-local-search`,
+        options: {
+          name: 'pages',
+          engine: 'flexsearch',
+          engineOptions: {
+            encode: 'icase',
+            tokenize: tokenizerFn,
+            threshold: 1,
+            resolution: 3,
+            depth: 1,
+            split: /[\s\,\.\!\?\:]+/
+          },
+          query: `
+            {
+              allStoryWriterMarkdown {
+                nodes {
+                  id
+                  title
+                  tags
+                  slug
+                  rawMarkdownBody
+                }
+              }
+            }
+          `,
+          ref: `id`,
+          index: ['title', 'body'],
+          store: ['id', 'slug', 'title'],
+          normalizer: ({ data }) =>
+            data.allStoryWriterMarkdown.nodes.map(node => ({
+              id: node.id,
+              slug: node.slug,
+              title: node.title,
+              body: node.rawMarkdownBody,
+            })),
+        }
+      },
       {
         resolve: `gatsby-plugin-layout`,
         options: {
