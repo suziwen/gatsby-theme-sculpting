@@ -113,7 +113,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
           let prev =
             index === blogPosts.length - 1 ? null : blogPosts[index + 1].node
           prev = wrapperNode(prev);
-          let slug = basePath + '/' + post.node.slug;
+          let slug = post.node.slug;
           // 删除多个重复的 / 符号
           slug = slug.replace(/\/+/g, `/`)
           createPage({
