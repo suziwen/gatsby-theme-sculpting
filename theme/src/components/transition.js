@@ -1,4 +1,6 @@
 import React from "react"
+import tocbot from 'tocbot';
+import ContextConsumer from "./context"
 import {
   TransitionGroup,
   Transition as ReactTransition,
@@ -23,28 +25,63 @@ const getTransitionStyles = {
 
 class Transition extends React.PureComponent {
   render() {
+    const _props = this.props
     const { children, location } = this.props
 
     return (
-      <TransitionGroup>
-        <ReactTransition
-          key={location.pathname}
-          timeout={{
-            enter: timeout,
-            exit: timeout,
-          }}
-        >
-          {status => (
-            <div
-              style={{
-                ...getTransitionStyles[status],
-              }}
-            >
-              {children}
-            </div>
-          )}
-        </ReactTransition>
-      </TransitionGroup>
+      <ContextConsumer>
+        {({data, set})=>{
+          return (
+            <TransitionGroup>
+              <ReactTransition
+                appear={true}
+                mountOnEnter={true}
+                unmountOnExit={true}
+                key={location.pathname}
+                onExit={()=>{
+                    console.log('exit')
+                    console.log(_props)
+                    set({
+                      transitionStatus: 1
+                    })
+                  }
+                }
+                onEntered={()=>{
+                  console.log('entered')
+                  console.log(location)
+                  console.log(_props)
+                  if (data.transitionStatus === 2) {
+                    set({
+                      transitionStatus: 3
+                    })
+                  }
+                }}
+                addEndListener={(node, done) => {
+                  console.log(node)
+                  node.addEventListener('transitionend', function(){
+                    done();
+                  }, false);
+                }}
+                timeout={{
+                  enter: timeout,
+                  exit: timeout,
+                }}
+              >
+                {status => (
+                  <div
+                    style={{
+                      ...getTransitionStyles[status],
+                    }}
+                  >
+                    {children}
+                  </div>
+                )}
+              </ReactTransition>
+            </TransitionGroup>
+
+          )
+        }}
+      </ContextConsumer>
     )
   }
 }

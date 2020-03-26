@@ -45,8 +45,8 @@ class BlogPostTemplate extends React.Component {
           </Helmet>
           <section
           >
-            <Toc onClick={function(){}}/>
             <div>
+              <Toc />
               <BioLine>
                 {post.updateDate}
               </BioLine>
