@@ -7,6 +7,37 @@ import get from "lodash/get";
 
 import Pagination from "../components/pagination"
 
+
+const PostTocItems = ({items, depth=0, maxDepth=3})=> {
+  if (depth <= maxDepth && items && items.length > 0) {
+    return (
+      <ul>
+        {items.map((tocItem)=>{
+          return (<li>
+            <Link to={tocItem.link}>
+            {tocItem.title}
+            {tocItem.items && (<PostTocItems items={tocItem.items} depth={depth + 1} maxDepth= {maxDepth}/>)}
+            </Link>
+          </li>)
+        })}
+      </ul>
+    )
+  }
+}
+
+const PostToc = ({tocStr})=>{
+  let toc = null
+  try {
+    toc = JSON.parse(tocStr)
+  } catch (e) {
+  }
+  if (toc && toc.length > 0) {
+    return (<div>
+      <PostTocItems items={toc} depth={0} maxDepth={3}/>
+    </div>)
+  }
+}
+
 class BlogPostsIndex extends React.Component {
   render() {
     const siteTitle = get(this, "props.data.site.siteMetadata.title");
@@ -25,17 +56,51 @@ class BlogPostsIndex extends React.Component {
             <Helmet bodyAttributes={{
               class: "roadbike-blog-list"
             }}>
-              <title>博客</title>
+              <title>博客列表</title>
             </Helmet>
             <div
             >
               {posts.map(({ node }) => (
                 <div key={node.slug}>
-                  <h1>{node.title}</h1>
-                  <br/>
-                  <Link
-                    to={node.slug}
-                  >{node.title}</Link>
+                  <h1 sx={{
+                    variant: `textStyles.heading`,
+                    position: 'relative',
+                    '&:before': {
+                      content: `"................................................................................................................................................."`,
+                      textAlign: `right`,
+                      color: `gray`,
+                      fontSize: `.8em`,
+                      bottom: `2px`,
+                      position: `absolute`,
+                      width: `98%`,
+                      pl: `5px`,
+                      letterSpacing: `2px`,
+                      overflow: `hidden`,
+                      zIndex: -1
+                    }
+                  }}>
+                    <Link
+                      to={node.slug}
+                      sx={{
+                        bg: `background`,
+                        pr: `1ch`
+                      }}
+                    >{node.title}
+                    <span sx={{
+                      float: 'right',
+                      pl: '1ch',
+                      bg: `background`,
+                      fontStyle: `normal`,
+                      fontSize: `0.8em`,
+                      bottom: `0`,
+                      top: `0.2em`,
+                      position: `relative`
+                    }}>
+                      {node.createDate}
+                    </span>
+                  </Link>
+                  </h1>
+                  <PostToc tocStr={node.toc}/>
                 </div>
               ))}
               <Pagination context={this.props.pageContext} />
@@ -75,9 +140,11 @@ export const pageQuery = graphql`
           }
           slug
           title
+          toc
           docType
           excerpt
           tags
+          createDate(formatString: "MMM DD,YYYY")
           updateDate(formatString: "YYYY-MM-DD")
           cover {
             childImageSharp {
