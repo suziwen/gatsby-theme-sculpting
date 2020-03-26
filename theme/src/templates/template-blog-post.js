@@ -6,6 +6,7 @@ import { Link, graphql } from "gatsby"
 import {MdArrowForward, MdArrowBack} from "react-icons/md"
 import Img from "gatsby-image"
 import TagsSection from "../components/tags-section"
+import Toc from "../components/toc"
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -44,6 +45,7 @@ class BlogPostTemplate extends React.Component {
           </Helmet>
           <section
           >
+            <Toc onClick={function(){}}/>
             <div>
               <BioLine>
                 {post.updateDate}

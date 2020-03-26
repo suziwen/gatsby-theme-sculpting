@@ -163,9 +163,16 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
 }
 
 
-exports.onCreateNode = ({ node, actions, getNodesByType, getNodes }) => {
+exports.onCreateNode = ({ node, actions, getNodesByType, getNodes }, pluginOptions) => {
   const { createNode, createNodeField } = actions
+  const basePath = pluginOptions.basePath || '/';
   if (node.internal.type === 'StoryWriterMarkdown') {
+    if (node.slug) {
+      let slug = node.slug
+      slug = '/' + basePath + '/' + slug
+      slug = slug.replace(/\/+/g, '/')
+      node.slug = slug
+    }
     if (!node.cover) {
       const fileNodes = getNodesByType('File');
       const coverNodes = fileNodes.filter((node)=>{
