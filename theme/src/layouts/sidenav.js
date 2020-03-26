@@ -2,7 +2,7 @@
 import { jsx } from 'theme-ui'
 import { AccordionNav } from '@theme-ui/sidenav'
 import NavLink from './nav-link'
-import Sidebar from '../sidebar.mdx'
+import Sidebar from '../header.mdx'
 
 const components = {
   wrapper: AccordionNav,

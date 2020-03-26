@@ -35,13 +35,13 @@ export default ({pageContext, location, children}) => {
                 <div
                   ref={nav}
                   sx={{
-                    display: ['block', 'flex'],
+                    display: ['block'],
                   }}
                 >
                   <Sidenav
                     open={menuOpen}
                     sx={{ 
-                      display: [null, 'block'],
+                      display: [null, 'none'],
                     }}
                     onFocus={() => setMenuOpen(true)}
                     onBlur={() => setMenuOpen(false)}

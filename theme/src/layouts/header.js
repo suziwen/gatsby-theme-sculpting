@@ -2,6 +2,7 @@
 import { jsx, Container, Flex, useColorMode } from 'theme-ui'
 import { MDXProvider } from '@mdx-js/react'
 
+import logoData from "../assets/logo-icon.png"
 import MenuButton from './menu-button'
 import NavLink from './nav-link'
 import Content from '../header.mdx'
@@ -50,12 +51,19 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
                 if (navLink) navLink.focus()
               }}
             />
-            <MDXProvider components={components}>
-              <Content />
-            </MDXProvider>
+            <div sx={{ml: 4}}>小书匠</div>
+            <div sx={{
+              display: ['none', 'block'],
+              ml: 'auto'
+            }}>
+              <MDXProvider components={components}>
+                <Content />
+              </MDXProvider>
+            </div>
             <Button
               sx={{
-                ml: 2,
+                ml: ['auto', 2],
+                mr: 4 
               }}
               onClick={cycleMode}>
               {mode}
