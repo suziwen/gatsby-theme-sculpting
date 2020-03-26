@@ -2,6 +2,7 @@
 import { jsx, Container, Flex, useColorMode } from 'theme-ui'
 import { MDXProvider } from '@mdx-js/react'
 
+import Headroom from "react-headroom"
 import logoData from "../assets/logo-icon.png"
 import MenuButton from './menu-button'
 import NavLink from './nav-link'
@@ -16,6 +17,8 @@ const components = {
 
 const styles = {
   alignItems: 'center',
+  bg: 'background',
+  borderBottom: '1px solid',
   width: '100%',
   h1: {
     m: 0
@@ -40,7 +43,7 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
   }
 
   return (
-      <Container>
+      <Headroom>
         <Flex sx={{ justifyContent: 'space-between' }}>
           <Flex sx={styles}>
             <MenuButton
@@ -70,6 +73,6 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
             </Button>
           </Flex>
         </Flex>
-      </Container>
+      </Headroom>
   )
 }
