@@ -12,10 +12,11 @@ import Header from './header'
 import Sidenav from './sidenav'
 
 const tocStyle = (menuOpen)=>{
+  const displayResult = menuOpen?`flex`: `none`
   return {
   position: [`fixed`],
-  maxWidth: `300px`,
-  display: [menuOpen?`flex`:`none`,`flex`],
+  maxWidth: `210px`,
+  display: [displayResult, `none`, `none`, `flex`],
   '.toc-list': {
     bg: 'background',
     listStyleType: 'none',
@@ -80,11 +81,6 @@ export default ({pageContext, location, children}) => {
                     onBlur={() => setMenuOpen(false)}
                     onClick={() => setMenuOpen(false)}
                   />
-                  <div className="toc-placeholder" sx={{
-                    width: `300px`, 
-                    minWidth: `300px`,
-                    display: ['none', 'block']
-                  }}></div>
                   <div className="toc" sx={tocStyle(menuOpen)}></div>
                   <div
                     sx={{
@@ -94,7 +90,7 @@ export default ({pageContext, location, children}) => {
                     }}
                   >
                     <Transition location={location}>
-                      <div sx={{ p: [0, 0, 5], mx: 'auto', my: 0, maxWidth: '1000px' }}>
+                      <div sx={{ p: [0, 0, 5], mx: 'auto', my: 0, maxWidth: '900px' }}>
                         {children}
                       </div>
                     </Transition>

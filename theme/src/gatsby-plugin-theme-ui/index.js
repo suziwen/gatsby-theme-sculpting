@@ -10,6 +10,7 @@ const heading = {
 
 export default {
   initialColorMode: 'light',
+  breakpoints: ['650px', '850px', '1200px'],
   colors: {
     text: '#000',
     background: '#fff',
