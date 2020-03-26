@@ -15,6 +15,6 @@ const Toc = ({onClick}) => {
     });
     return () => tocbot.destroy()
   })
-  return (<div className="toc" onClick={onClick}></div>)
+  return (<></>)
 }
 export default Toc

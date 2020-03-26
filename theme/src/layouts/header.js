@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, Container, Flex, useColorMode } from 'theme-ui'
+import React from "react"
 import { MDXProvider } from '@mdx-js/react'
 
 import Headroom from "react-headroom"

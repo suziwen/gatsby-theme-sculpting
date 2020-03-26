@@ -361,7 +361,7 @@ div.mathjax {
   .mindmap_container {
       margin-left: calc(-100vw / 2 + 100% / 2 + 8rem);
       margin-right: calc(-100vw / 2 + 100% / 2);
-      max-width: calc(100vw - 17.4rem);
+      max-width: calc(100vw - 18.4rem);
   }
 }
 
