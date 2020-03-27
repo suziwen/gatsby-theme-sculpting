@@ -14,6 +14,7 @@ class BlogPostTemplate extends React.Component {
     const post = this.props.data.storyWriterMarkdown;
     const prev = this.props.pageContext.prev
     const next = this.props.pageContext.next
+    const location = this.props.location
     const BioLine = ({ children }) => (
       <p
       >
@@ -46,7 +47,7 @@ class BlogPostTemplate extends React.Component {
           <section
           >
             <div>
-              <Toc />
+              <Toc location={location} />
               <BioLine>
                 {post.updateDate}
               </BioLine>

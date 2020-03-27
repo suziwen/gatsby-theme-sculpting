@@ -38,30 +38,6 @@ class Transition extends React.PureComponent {
                 mountOnEnter={true}
                 unmountOnExit={true}
                 key={location.pathname}
-                onExit={()=>{
-                    console.log('exit')
-                    console.log(_props)
-                    set({
-                      transitionStatus: 1
-                    })
-                  }
-                }
-                onEntered={()=>{
-                  console.log('entered')
-                  console.log(location)
-                  console.log(_props)
-                  if (data.transitionStatus === 2) {
-                    set({
-                      transitionStatus: 3
-                    })
-                  }
-                }}
-                addEndListener={(node, done) => {
-                  console.log(node)
-                  node.addEventListener('transitionend', function(){
-                    done();
-                  }, false);
-                }}
                 timeout={{
                   enter: timeout,
                   exit: timeout,
