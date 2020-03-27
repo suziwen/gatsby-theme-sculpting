@@ -9,6 +9,7 @@ import { Global } from '@emotion/core'
 import { Styled, Container, jsx, useThemeUI } from 'theme-ui'
 
 import Header from './header'
+import Footer from './footer'
 import Sidenav from './sidenav'
 
 const tocStyle = (menuOpen)=>{
@@ -60,7 +61,11 @@ export default ({pageContext, location, children}) => {
     }
   }
   return (
-    <Styled.root>
+    <div sx={{
+      minHeight: '100VH',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       <Global styles={bodyStyles} />
       <SiteMetadata pathname={location.pathname} />
       <ContextProviderComponent>
@@ -73,6 +78,7 @@ export default ({pageContext, location, children}) => {
                   ref={nav}
                   sx={{
                     display: ['block', 'flex'],
+                    flex: 1,
                   }}
                 >
                   <Sidenav
@@ -96,11 +102,12 @@ export default ({pageContext, location, children}) => {
                     </Transition>
                   </div>
                 </div>
+                <Footer />
               </>
             )
           }}
         </ContextConsumer>
       </ContextProviderComponent>
-    </Styled.root>
+    </div>
   )
 }
