@@ -8,10 +8,13 @@
     "gatsby": "^2.6.0"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "@mdx-js/mdx": "^1.5.7",
     "@mdx-js/react": "^1.5.7",
     "@theme-ui/sidenav": "^0.3.1",
     "emotion": "^10.0.27",
+    "framer-motion": "^1.10.2",
     "gatsby-image": "^2.3.0",
     "gatsby-plugin-layout": "^1.2.0",
     "gatsby-plugin-local-search": "^1.1.1",

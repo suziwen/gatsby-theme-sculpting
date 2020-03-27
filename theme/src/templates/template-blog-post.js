@@ -7,6 +7,7 @@ import {MdArrowForward, MdArrowBack} from "react-icons/md"
 import Img from "gatsby-image"
 import TagsSection from "../components/tags-section"
 import Toc from "../components/toc"
+import ProgressIndicator from "../components/progress-indicator"
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -48,6 +49,7 @@ class BlogPostTemplate extends React.Component {
           >
             <div>
               <Toc location={location} />
+              <ProgressIndicator />
               <BioLine>
                 {post.updateDate}
               </BioLine>
