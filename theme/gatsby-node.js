@@ -86,6 +86,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
                   component: tagTemplate,
                   context: {
                       tag,
+                      basePath: basePath
                   },
               });
           });
@@ -93,7 +94,8 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
           path: `/tags/`,
           component: tagsTemplate,
           context: {
-            allTags: taginfo
+            allTags: taginfo,
+            basePath: basePath
           }
         })
 
@@ -121,6 +123,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
             component: blogPostTemplate,
             context: {
               slug: post.node.slug,
+              basePath: basePath,
               prev,
               next
             },
@@ -140,6 +143,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
               context:
                   {
                     limit: pageSize,
+                    basePath: basePath,
                     skip: index * pageSize,
                     docType: docType,
                     numPages: Math.ceil(blogPosts.length / pageSize),

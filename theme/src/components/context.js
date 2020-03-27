@@ -2,7 +2,7 @@ import React from "react"
 
 const defaultContextValue = {
   data: {
-    transitionStatus: 0
+    transitionStatus: 2
   },
   set: ()=>{}
 }

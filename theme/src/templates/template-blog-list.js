@@ -8,16 +8,17 @@ import get from "lodash/get";
 import Pagination from "../components/pagination"
 
 
-const PostTocItems = ({items, depth=0, maxDepth=3})=> {
+const PostTocItems = ({items, depth=0, maxDepth=3, basePath='/'})=> {
   if (depth <= maxDepth && items && items.length > 0) {
     return (
       <ul>
         {items.map((tocItem)=>{
-          return (<li>
-            <Link to={tocItem.link}>
+          const link = ("/" + basePath + "/" + tocItem.link).replace(/\/+/g, '/')
+          return (<li key={link}>
+            <Link to={link}>
             {tocItem.title}
-            {tocItem.items && (<PostTocItems items={tocItem.items} depth={depth + 1} maxDepth= {maxDepth}/>)}
             </Link>
+            {tocItem.items && (<PostTocItems items={tocItem.items} depth={depth + 1} maxDepth= {maxDepth}/>)}
           </li>)
         })}
       </ul>
@@ -25,7 +26,7 @@ const PostTocItems = ({items, depth=0, maxDepth=3})=> {
   }
 }
 
-const PostToc = ({tocStr})=>{
+const PostToc = ({tocStr, basePath})=>{
   let toc = null
   try {
     toc = JSON.parse(tocStr)
@@ -33,7 +34,7 @@ const PostToc = ({tocStr})=>{
   }
   if (toc && toc.length > 0) {
     return (<div>
-      <PostTocItems items={toc} depth={0} maxDepth={3}/>
+      <PostTocItems items={toc} depth={0} maxDepth={3} basePath={basePath}/>
     </div>)
   }
 }
@@ -49,6 +50,7 @@ class BlogPostsIndex extends React.Component {
     const posts = get(this, "props.data.allStoryWriterMarkdown.edges");
     const pagesTotal = get(this, "props.pageContext.pagesTotal");
     const currentPage = get(this, "props.pageContext.currentPage");
+    const basePath = get(this, "props.pageContext.basePath");
 
     return (
           <main
@@ -100,7 +102,7 @@ class BlogPostsIndex extends React.Component {
                     </span>
                   </Link>
                   </h1>
-                  <PostToc tocStr={node.toc}/>
+                  <PostToc tocStr={node.toc} basePath={basePath}/>
                 </div>
               ))}
               <Pagination context={this.props.pageContext} />
