@@ -2,20 +2,28 @@ import React from "react"
 import { navigate } from "gatsby"
 import {MdArrowForward, MdArrowBack} from "react-icons/md"
 import PaginationLink from "./PaginationLink"
+import mergePath from "../../utils/merge-path"
 
 class Pagination extends React.Component {
-  changePage = e => {
-    navigate(e.target.value ? `/page/${e.target.value}` : `/`)
+  constructor(props) {
+    super(props)
+    this.changePage = this.changePage.bind(this)
+
+  }
+  changePage(e){
+    const basePath = this.props.context.basePath
+    const pageStr = e.target.value ? `/page/${e.target.value}` : `/`
+    navigate(mergePath(basePath, pageStr))
   }
   render() {
-    const { numPages, currentPage } = this.props.context
+    const { numPages, currentPage, basePath } = this.props.context
     const isFirst = currentPage === 1
     const isLast = currentPage === numPages
-    const prevPageNum =
-      currentPage - 1 === 1 ? `` : `page/${(currentPage - 1).toString()}`
-    const nextPageNum = (currentPage + 1).toString()
-    const prevPageLink = isFirst ? null : `/page/${prevPageNum}`
-    const nextPageLink = isLast ? null : `/page/${nextPageNum}`
+    const prevPageStr =
+      currentPage - 1 === 1 ? `` : `/page/${(currentPage - 1).toString()}`
+    const nextPageStr = `/page/${currentPage + 1}`
+    const prevPageLink = isFirst ? null : mergePath(basePath, prevPageStr)
+    const nextPageLink = isLast ? null : mergePath(basePath, nextPageStr)
     return (
       <div
       >
@@ -23,10 +31,10 @@ class Pagination extends React.Component {
         >
           <PaginationLink to={prevPageLink}>
             <MdArrowBack style={{ verticalAlign: `sub` }} />
-            上一篇
+            上一页
           </PaginationLink>
           <PaginationLink to={nextPageLink}>
-            下一篇
+            下一页
             <MdArrowForward style={{ verticalAlign: `sub` }} />
           </PaginationLink>
         </div>
