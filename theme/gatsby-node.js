@@ -12,7 +12,7 @@ const getRandomInt = function (min, max) {
 exports.createPages = ({ graphql, actions }, pluginOptions) => {
   const { createPage, createRedirect } = actions
   const docType =  pluginOptions.docType || 'posts';
-  const pageSize = pluginOptions.pageSize ||  8;
+  const pageSize = pluginOptions.pageSize ||  4;
   const basePath = pluginOptions.basePath || '/';
 
   return new Promise((resolve, reject) => {

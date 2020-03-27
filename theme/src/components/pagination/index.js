@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx} from 'theme-ui'
 import React from "react"
 import { navigate } from "gatsby"
 import {MdArrowForward, MdArrowBack} from "react-icons/md"
@@ -26,8 +28,24 @@ class Pagination extends React.Component {
     const nextPageLink = isLast ? null : mergePath(basePath, nextPageStr)
     return (
       <div
+        sx={{
+          display: `flex`,
+          justifyContent: `space-between`,
+          my: 5,
+          mx: 0,
+          flexDirection: [`column`, `row`],
+        }}
       >
         <div
+          sx={{
+            display: `flex`,
+            margin: 0,
+            padding: 0,
+            justifyContent: `space-between`,
+            width: `15em`,
+            alignItems: `center`,
+            mb: 1
+          }}
         >
           <PaginationLink to={prevPageLink}>
             <MdArrowBack style={{ verticalAlign: `sub` }} />
@@ -40,6 +58,11 @@ class Pagination extends React.Component {
         </div>
         {numPages>1?
         <div
+          sx={{
+            display: `flex`,
+            alignItems: `center`,
+            justifyContent: `flex-end`,
+          }}
         >
           <span>跳转到 &nbsp;</span>
           <select

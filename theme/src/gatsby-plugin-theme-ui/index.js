@@ -83,6 +83,11 @@ export default {
       mt: 3,
     },
   },
+  buttons: {
+    secondary: {
+      cursor: 'pointer',
+    },
+  },
   styles: {
     Container: {
       p: 3,
