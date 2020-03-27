@@ -6,8 +6,9 @@ import React from "react"
 const styles = {
   alignItems: 'center',
   bg: 'background',
-  borderBottom: '1px solid',
+  borderTop: '1px solid',
   width: '100%',
+  justifyContent: 'space-between',
   h1: {
     m: 0
   },
@@ -24,10 +25,11 @@ const styles = {
 export default () => {
 
   return (
-        <Flex sx={{ justifyContent: 'space-between' }}>
           <Flex sx={styles}>
             <div sx={{ml: 4}}>小书匠</div>
-            <div>
+            <div sx={{
+              mr: 4
+            }}>
               <div>
                 suziwen © 2020
               </div>
@@ -36,7 +38,6 @@ export default () => {
               </div>
             </div>
           </Flex>
-        </Flex>
   )
 }
 
