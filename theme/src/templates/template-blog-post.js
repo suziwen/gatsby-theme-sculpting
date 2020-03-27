@@ -18,6 +18,9 @@ class BlogPostTemplate extends React.Component {
     const location = this.props.location
     const BioLine = ({ children }) => (
       <p
+        sx={{
+          fontFamily: 'english'
+        }}
       >
         {children}
       </p>
@@ -73,10 +76,13 @@ class BlogPostTemplate extends React.Component {
             <div sx={{flex: 1, textAlign: `left`}}>
               {prev && (
                 <Link to={prev.slug}>
-                  <h4>Previous</h4>
+                  <h4 sx={{
+                    fontFamily: 'english'
+                  }}>
+                    <MdArrowBack style={{ verticalAlign: `sub` }} />
+                    Previous</h4>
                   <span
                   >
-                    <MdArrowBack style={{ verticalAlign: `sub` }} />
                     {prev.title}
                   </span>
                 </Link>
@@ -85,11 +91,14 @@ class BlogPostTemplate extends React.Component {
             <div sx={{flex: 1, textAlign: `right`}}>
               {next && (
                 <Link to={next.slug}>
-                  <h4>Next</h4>
+                  <h4 sx={{
+                    fontFamily: 'english'
+                  }}>Next
+                    <MdArrowForward style={{ verticalAlign: `sub` }} />
+                  </h4>
                   <span
                   >
                     {next.title}
-                    <MdArrowForward style={{ verticalAlign: `sub` }} />
                   </span>
                 </Link>
               )}

@@ -28,7 +28,8 @@ export default () => {
           <Flex sx={styles}>
             <div sx={{ml: 4}}>小书匠</div>
             <div sx={{
-              mr: 4
+              mr: 4,
+              fontFamily: 'english'
             }}>
               <div>
                 suziwen © 2020

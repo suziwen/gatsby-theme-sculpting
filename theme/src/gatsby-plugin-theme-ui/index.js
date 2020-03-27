@@ -65,6 +65,7 @@ export default {
     body: 'system-ui, sans-serif',
     heading: 'inherit',
     monospace: 'Menlo, monospace',
+    english: 'oswald, sans-serif',
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
   fontWeights: {

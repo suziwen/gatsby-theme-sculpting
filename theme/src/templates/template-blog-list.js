@@ -94,6 +94,7 @@ class BlogPostsIndex extends React.Component {
                       bg: `background`,
                       fontStyle: `normal`,
                       fontSize: `0.8em`,
+                      fontFamily: 'english',
                       bottom: `0`,
                       top: `0.2em`,
                       position: `relative`

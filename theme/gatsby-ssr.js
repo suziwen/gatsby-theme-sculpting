@@ -7,6 +7,7 @@ exports.onRenderBody = ({ setHeadComponents, setPostBodyComponents }, pluginOpti
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "css/story-writer-markdown-default.css"}/>,
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "css/story-writer-markdown-components.css"}/>,
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "fonts/Webfonts/xsj/stylesheet.css"}/>,
+    <link rel="stylesheet" type="text/css" href={withPrefix('/') + "fonts/Webfonts/oswald/stylesheet.css"}/>,
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "xsjfonts/fontstyles/zh.css"}/>,
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "css/font-awesome.min.css"}/>,
     <link rel="stylesheet" type="text/css" href={withPrefix('/') + "css/svg-with-js.css"}/>

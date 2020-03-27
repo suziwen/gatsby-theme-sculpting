@@ -71,6 +71,8 @@ class Pagination extends React.Component {
             value={currentPage === 1 ? `` : currentPage.toString()}
             onChange={this.changePage}
             sx={{
+
+              fontFamily: 'english',
               width: '3em',
               border: 'none'
             }}
@@ -84,8 +86,12 @@ class Pagination extends React.Component {
               </option>
             ))}
           </Select>
-          <span> &nbsp;/ &nbsp;</span>
-          <span>{numPages}</span>
+          <span sx={{
+            fontFamily: 'english',
+          }}> &nbsp;/ &nbsp;</span>
+            <span sx={{
+              fontFamily: 'english',
+            }}>{numPages}</span>
         </div>
         : ""
         }
