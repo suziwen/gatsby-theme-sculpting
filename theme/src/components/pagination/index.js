@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx} from 'theme-ui'
+import { jsx, Select} from 'theme-ui'
 import React from "react"
 import { navigate } from "gatsby"
 import {MdArrowForward, MdArrowBack} from "react-icons/md"
@@ -62,12 +62,18 @@ class Pagination extends React.Component {
             display: `flex`,
             alignItems: `center`,
             justifyContent: `flex-end`,
+            mb: 2,
+            position: 'relative',
           }}
         >
           <span>跳转到 &nbsp;</span>
-          <select
+          <Select
             value={currentPage === 1 ? `` : currentPage.toString()}
             onChange={this.changePage}
+            sx={{
+              width: '3em',
+              border: 'none'
+            }}
           >
             {Array.from({ length: numPages }, (_, i) => (
               <option
@@ -77,15 +83,8 @@ class Pagination extends React.Component {
                 {i + 1}
               </option>
             ))}
-          </select>
-          <svg
-            width="10"
-            height="5"
-            viewBox="0 0 10 5"
-          >
-            <path d="M0 0l5 4.998L10 0z" fillRule="evenodd" />
-          </svg>
-          <span>of &nbsp;</span>
+          </Select>
+          <span> &nbsp;/ &nbsp;</span>
           <span>{numPages}</span>
         </div>
         : ""
