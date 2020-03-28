@@ -24,9 +24,9 @@ const Tags = ({ pageContext, data, location }) => {
           {years.map((_year)=>{
             const _yearinfo = yearinfo[_year]
             if (_year === year) {
-              return (<div>{year}</div>)
+              return (<div key={_year}>{year}</div>)
             } else {
-              return (<Link href={_yearinfo.slug} variant='nav'>{_year}</Link>)
+              return (<Link key={_year} href={_yearinfo.slug} variant='nav'>{_year}</Link>)
             }
           })
           }
