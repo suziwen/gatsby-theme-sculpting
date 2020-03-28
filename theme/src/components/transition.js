@@ -1,5 +1,4 @@
 import React from "react"
-import tocbot from 'tocbot';
 import ContextConsumer from "./context"
 import {
   TransitionGroup,

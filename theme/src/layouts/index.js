@@ -2,7 +2,6 @@
 import React, { useState, useRef } from "react"
 import { navigate, PageRenderer } from "gatsby"
 import SiteMetadata from "../components/site-metadata"
-import Transition from "../components/transition"
 import ContextConsumer, { ContextProviderComponent } from "../components/context"
 
 import { Global } from '@emotion/core'
@@ -92,14 +91,9 @@ export default ({pageContext, location, children}) => {
                     sx={{
                       flex: 1,
                       overflow: 'hidden',
-                      px: 3,
                     }}
                   >
-                    <Transition location={location}>
-                      <div sx={{ p: [0, 0, 5], mx: 'auto', my: 0, maxWidth: '900px' }}>
-                        {children}
-                      </div>
-                    </Transition>
+                  {children}
                   </div>
                 </div>
                 <Footer />

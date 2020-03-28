@@ -7,8 +7,7 @@ import { Link, graphql } from "gatsby"
 import {Calendar, CalendarControls} from 'react-yearly-calendar'
 
 import CalendarDiv from '../components/calendar-style'
-
-
+import ContentContainer from '../components/content-container'
 
 
 const Tags = ({ pageContext, data, location }) => {
@@ -17,7 +16,7 @@ const Tags = ({ pageContext, data, location }) => {
   const years = Object.keys(yearinfo)
 
   return (
-    <div>
+    <ContentContainer>
       <h1 sx={{
         display: 'flex',
         }}>
@@ -47,7 +46,7 @@ const Tags = ({ pageContext, data, location }) => {
           })
         })}
       </ul>
-    </div>
+    </ContentContainer>
   )
 }
 

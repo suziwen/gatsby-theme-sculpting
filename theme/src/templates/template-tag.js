@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link, graphql } from "gatsby"
+import ContentContainer from '../components/content-container'
 
 
 const Tags = ({ pageContext, data, location }) => {
@@ -11,7 +12,7 @@ const Tags = ({ pageContext, data, location }) => {
   } tagged with "${tag}"`
 
   return (
-    <div>
+    <ContentContainer>
       <h1>{tagHeader}</h1>
       <ul>
         {edges.map(({ node }) => {
@@ -25,7 +26,7 @@ const Tags = ({ pageContext, data, location }) => {
         })}
       </ul>
       <Link to="/tags">All tags</Link>
-    </div>
+    </ContentContainer>
   )
 }
 

@@ -3,6 +3,7 @@ import debounce from "lodash.debounce"
 import FlexSearch from 'flexsearch'
 import SearchForm from "../components/search/search-form"
 import SearchResults from "../components/search/search-results"
+import ContentContainer from '../components/content-container'
 
 const Search = ({ data, location }) => {
   const [results, setResults] = useState([])
@@ -34,10 +35,10 @@ const Search = ({ data, location }) => {
   }, [location.search])
 
   return (
-    <div>
+    <ContentContainer>
       <SearchForm query={searchQuery} />
       <SearchResults query={searchQuery} results={results} />
-    </div>
+    </ContentContainer>
   )
 }
 

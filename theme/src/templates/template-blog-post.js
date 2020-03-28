@@ -8,6 +8,7 @@ import Img from "gatsby-image"
 import TagsSection from "../components/tags-section"
 import Toc from "../components/toc"
 import ProgressIndicator from "../components/progress-indicator"
+import ContentContainer from '../components/content-container'
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -29,7 +30,7 @@ class BlogPostTemplate extends React.Component {
     const postHtmlAndCss = `<style>${post.customCss}</style>\n${post.html}`
 
     return (
-        <div>
+        <ContentContainer>
           {/* Add long list of social meta tags */}
           <Helmet>
             <title>{post.title}</title>
@@ -104,7 +105,7 @@ class BlogPostTemplate extends React.Component {
               )}
             </div>
           </div>
-        </div>
+        </ContentContainer>
 
     )
   }

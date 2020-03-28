@@ -6,6 +6,7 @@ import Helmet from "react-helmet"
 import get from "lodash/get";
 
 import Pagination from "../components/pagination"
+import ContentContainer from '../components/content-container'
 
 
 const PostTocItems = ({items, depth=0, maxDepth=3, basePath='/'})=> {
@@ -53,8 +54,7 @@ class BlogPostsIndex extends React.Component {
     const basePath = get(this, "props.pageContext.basePath");
 
     return (
-          <main
-          >
+          <ContentContainer>
             <Helmet bodyAttributes={{
               class: "roadbike-blog-list"
             }}>
@@ -108,7 +108,7 @@ class BlogPostsIndex extends React.Component {
               ))}
               <Pagination context={this.props.pageContext} />
             </div>
-          </main>
+          </ContentContainer>
     )
   }
 }
