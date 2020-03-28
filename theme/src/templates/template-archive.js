@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import { jsx, Button, Link} from 'theme-ui'
+import { jsx, Button} from 'theme-ui'
 import React from "react"
 import styled from '@emotion/styled'
 import PropTypes from "prop-types"
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import {Calendar, CalendarControls} from 'react-yearly-calendar'
 
 import CalendarDiv from '../components/calendar-style'
@@ -26,7 +26,7 @@ const Tags = ({ pageContext, data, location }) => {
             if (_year === year) {
               return (<div key={_year}>{year}</div>)
             } else {
-              return (<Link key={_year} href={_yearinfo.slug} variant='nav'>{_year}</Link>)
+              return (<Link key={_year} to={_yearinfo.slug} >{_year}</Link>)
             }
           })
           }
@@ -41,7 +41,7 @@ const Tags = ({ pageContext, data, location }) => {
             const slug = node.slug
             return (
               <li key={slug}>
-                <Link href={slug}>{title}</Link>
+                <Link to={slug}>{title}</Link>
               </li>
             )
           })

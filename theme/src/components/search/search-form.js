@@ -31,6 +31,9 @@ class SearchForm extends React.Component {
           aria-controls="search-results-count"
           {...reactComposition({
             onChange: e =>{
+              if (e.reactComposition.composition === false) {
+                navigate(`/search?keywords=${encodeURIComponent(this.state.query)}`)
+              }
               self.setState({
                 query: e.target.value
               })
