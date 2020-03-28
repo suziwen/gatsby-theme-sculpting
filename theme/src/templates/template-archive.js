@@ -1,7 +1,9 @@
+/** @jsx jsx */
+import { jsx, Button, Link} from 'theme-ui'
 import React from "react"
 import styled from '@emotion/styled'
 import PropTypes from "prop-types"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import {Calendar, CalendarControls} from 'react-yearly-calendar'
 
 import CalendarDiv from '../components/calendar-style'
@@ -10,12 +12,25 @@ import CalendarDiv from '../components/calendar-style'
 
 
 const Tags = ({ pageContext, data, location }) => {
-  const { year } = pageContext
+  const { year, yearinfo } = pageContext
   const { group } = data.allStoryWriterMarkdown
+  const years = Object.keys(yearinfo)
 
   return (
     <div>
-      <h1>{year}</h1>
+      <h1 sx={{
+        display: 'flex',
+        }}>
+          {years.map((_year)=>{
+            const _yearinfo = yearinfo[_year]
+            if (_year === year) {
+              return (<div>{year}</div>)
+            } else {
+              return (<Link href={_yearinfo.slug} variant='nav'>{_year}</Link>)
+            }
+          })
+          }
+      </h1>
       <CalendarDiv>
       <Calendar year={parseInt(year)}/>
       </CalendarDiv>
@@ -26,7 +41,7 @@ const Tags = ({ pageContext, data, location }) => {
             const slug = node.slug
             return (
               <li key={slug}>
-                <Link to={slug}>{title}</Link>
+                <Link href={slug}>{title}</Link>
               </li>
             )
           })

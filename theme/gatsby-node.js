@@ -76,7 +76,6 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
             yearinfo[createYear] = 1
           }
           
-          yearinfo[edge.node.createYear]
           if (_.get(edge, "node.tags")) {
             edge.node.tags.forEach((tag)=>{
               tag = tag.trim()
@@ -111,13 +110,21 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
           }
         })
         // Archive pages:
+        const nowYear = new Date().getFullYear() + ''
+        yearinfo[nowYear] = 0
         Object.keys(yearinfo).forEach(year => {
-          const archiveSlug = `/archives/${year}/`
+          let archiveSlug = `/archives/${year}/`
+          if (year === nowYear) {
+            archiveSlug = '/archives'
+          }
+          const count = yearinfo[year]
+          yearinfo[year] = {slug: archiveSlug, count: count}
           createPage({
             path: archiveSlug,
             component: archiveTemplate,
             context: {
-              year
+              year,
+              yearinfo
             }
           })
         })
