@@ -7,7 +7,6 @@ const tokenizerFn = function(str){
   results = results.concat(enStrs)
   const zhStr = str.replace(/[\w\s\,\.\!\?\:]+/gm, ',')
   const zhStrs = nodejieba.cutForSearch(zhStr)
-  console.log(zhStrs)
   results = results.concat(zhStrs)
   return results
 }

@@ -55,7 +55,12 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
                 if (navLink) navLink.focus()
               }}
             />
-            <div sx={{ml: 4}}>小书匠</div>
+            <div sx={{
+              ml: 4,
+              fontFamily: 'webfontxiaoshujiang, sans-serif',
+              fontWeight: 'bold',
+              fontSize: '1.5em'
+            }}>小书匠</div>
             <div sx={{
               display: ['none', 'block'],
               ml: 'auto'

@@ -1,6 +1,7 @@
 const _ = require(`lodash`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
+const moment = require(`moment`)
 
 
 const getRandomInt = function (min, max) {
@@ -177,6 +178,9 @@ exports.onCreateNode = ({ node, actions, getNodesByType, getNodes }, pluginOptio
       slug = slug.replace(/\/+/g, '/')
       node.slug = slug
     }
+    node.createYear= moment(node.createDate).format('YYYY')
+    node.createYearMonth= moment(node.createDate).format('YYYYMM')
+    node.createYearMonthDay= moment(node.createDate).format('YYYYMMDD')
     if (!node.cover) {
       const fileNodes = getNodesByType('File');
       const coverNodes = fileNodes.filter((node)=>{
