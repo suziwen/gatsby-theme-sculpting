@@ -21,6 +21,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
     const paginatedPostsTemplate = require.resolve(`./src/templates/template-blog-list.js`)
     const tagTemplate = require.resolve(`./src/templates/template-tag.js`)
     const tagsTemplate = require.resolve(`./src/templates/template-tags.js`)
+    const archiveTemplate = require.resolve(`./src/templates/template-archive.js`)
     resolve(
       graphql(
         `
@@ -32,6 +33,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
                 node {
                   title
                   toc
+                  createYear
                   docType
                   slug
                   tags
@@ -62,35 +64,44 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
           return undefined
         })
 
-          // Tag pages:
-          let taginfo = {};
-          // Iterate through each post, putting all found tags into `tags`
-          blogPosts.forEach(edge => {
-              if (_.get(edge, "node.tags")) {
-                edge.node.tags.forEach((tag)=>{
-                  tag = tag.trim()
-                  if (taginfo[tag]) {
-                    taginfo[tag]++
-                  } else {
-                    taginfo[tag] = 1
-                  }
-                })
+        // Tag pages:
+        let taginfo = {};
+        let yearinfo = {}
+        // Iterate through each post, putting all found tags into `tags`
+        blogPosts.forEach(edge => {
+          const createYear = edge.node.createYear
+          if (yearinfo[createYear]) {
+            yearinfo[createYear]++
+          } else {
+            yearinfo[createYear] = 1
+          }
+          
+          yearinfo[edge.node.createYear]
+          if (_.get(edge, "node.tags")) {
+            edge.node.tags.forEach((tag)=>{
+              tag = tag.trim()
+              if (taginfo[tag]) {
+                taginfo[tag]++
+              } else {
+                taginfo[tag] = 1
               }
-          });
-          // Make tag pages
-          Object.keys(taginfo).forEach(tag => {
-              const tagSlug = `/tags/${_.kebabCase(tag)}/`
-              const count = taginfo[tag]
-              taginfo[tag] = {slug: tagSlug, count: count}
-              createPage({
-                  path: tagSlug,
-                  component: tagTemplate,
-                  context: {
-                      tag,
-                      basePath: basePath
-                  },
-              });
-          });
+            })
+          }
+        });
+        // Make tag pages
+        Object.keys(taginfo).forEach(tag => {
+            const tagSlug = `/tags/${_.kebabCase(tag)}/`
+            const count = taginfo[tag]
+            taginfo[tag] = {slug: tagSlug, count: count}
+            createPage({
+                path: tagSlug,
+                component: tagTemplate,
+                context: {
+                    tag,
+                    basePath: basePath
+                },
+            });
+        });
         createPage({
           path: `/tags/`,
           component: tagsTemplate,
@@ -99,6 +110,18 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
             basePath: basePath
           }
         })
+        // Archive pages:
+        Object.keys(yearinfo).forEach(year => {
+          const archiveSlug = `/archives/${year}/`
+          createPage({
+            path: archiveSlug,
+            component: archiveTemplate,
+            context: {
+              year
+            }
+          })
+        })
+
 
         blogPosts.forEach((post, index) => {
           const wrapperNode = (node)=>{

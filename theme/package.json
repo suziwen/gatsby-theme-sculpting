@@ -40,6 +40,7 @@
     "react-icons": "^3.9.0",
     "react-transition-group": "^4.3.0",
     "react-use-flexsearch": "^0.1.1",
+    "react-yearly-calendar": "^1.2.4",
     "theme-ui": "^0.3.1",
     "tocbot": "^4.10.1"
   }
