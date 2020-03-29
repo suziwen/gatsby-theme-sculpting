@@ -1,6 +1,7 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 import { Link } from 'gatsby'
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 import isAbsoluteURL from 'is-absolute-url'
 
 const styles = {
@@ -22,17 +23,19 @@ export default ({ href, children, ...props }) => {
   if (isExternal) {
     return <a {...props} href={href} sx={styles}>{children}</a>
   }
+  const { theme } = useThemeUI()
 
   const to = props.to || href
-
   return (
-    <Link
+    <AniLink
+      paintDrip
+      hex={theme.colors.primary}
       {...props}
       to={to}
       sx={styles}
       activeClassName="active"
     >
       {children}
-    </Link>
+    </AniLink>
   )
 }
