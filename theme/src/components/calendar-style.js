@@ -2,6 +2,9 @@ import styled from '@emotion/styled'
 const CalendarDiv = styled.div`
   font-family: ${props => props.theme.fonts.english};
   transform: translate(50%,0);
+  & * {
+    box-sizing: content-box;
+  }
   & table.calendar {
     transform: translate(-50%,0);
     border-collapse: collapse;
@@ -94,6 +97,10 @@ const CalendarDiv = styled.div`
     border-bottom-right-radius: 15px;
     overflow: hidden;
     background: orangered;
+  }
+  /* hot */
+  & table.calendar td.hot {
+    box-shadow: inset 0 0 0px 2px;
   }
 
   @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
