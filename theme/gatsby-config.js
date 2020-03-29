@@ -64,9 +64,9 @@ module.exports = options => {
         }
       },
       {
-        resolve: "gatsby-plugin-transition-link",
+        resolve: "gatsby-plugin-layout",
         options: {
-          layout: require.resolve(`./src/layouts/index.js`)
+          component: require.resolve(`./src/layouts/index.js`)
         }
       },
       "gatsby-plugin-theme-ui",
