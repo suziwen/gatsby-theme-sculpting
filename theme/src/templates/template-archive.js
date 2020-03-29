@@ -70,6 +70,8 @@ class ArchiveTemplate extends React.Component {
       <ContentContainer>
         <h1 sx={{
           display: 'flex',
+          fontFamily: 'english',
+          textShadow: t => `1px 1px ${t.colors.background}, 2px 2px ${t.colors.text}`,
           }}>
             {years.map((_year)=>{
               const _yearinfo = yearinfo[_year]
