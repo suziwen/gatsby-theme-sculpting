@@ -16,6 +16,7 @@ const tocStyle = (menuOpen)=>{
   return {
   position: [`fixed`],
   maxWidth: `210px`,
+  zIndex: 1,
   display: [displayResult, `none`, `none`, `flex`],
   '.toc-list': {
     bg: 'background',
@@ -53,6 +54,9 @@ export default ({pageContext, location, children}) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const nav = useRef(null)
   const bodyStyles = {
+    html: {
+      overflowY: `scroll`
+    },
     body: {
       margin: 0,
       color: colors.text,
@@ -90,6 +94,7 @@ export default ({pageContext, location, children}) => {
                   <div
                     sx={{
                       flex: 1,
+                      zIndex: 0,
                       overflow: 'hidden',
                     }}
                   >

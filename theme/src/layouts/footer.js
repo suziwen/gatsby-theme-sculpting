@@ -5,6 +5,7 @@ import React from "react"
 
 const styles = {
   alignItems: 'center',
+  zIndex: 0,
   bg: 'background',
   borderTop: '1px solid',
   width: '100%',
