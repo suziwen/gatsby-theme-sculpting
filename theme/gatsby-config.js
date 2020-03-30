@@ -69,6 +69,13 @@ module.exports = options => {
           component: require.resolve(`./src/layouts/index.js`)
         }
       },
+      {
+        resolve: `gatsby-plugin-nprogress`,
+        options: {
+          color: `#9D7CBF`,
+          showSpinner: true
+        }
+      },
       "gatsby-plugin-theme-ui",
       {
         resolve: `gatsby-source-filesystem`,
