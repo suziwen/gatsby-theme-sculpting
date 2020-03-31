@@ -101,7 +101,7 @@ class ArchiveTemplate extends React.Component {
           />
         </CalendarDiv>
         {!yearinfo[year] || !yearinfo[year].count && (
-          <Message>
+          <Message sx={{mt: 3}}>
             今年还没有创建任何文章
           </Message>
         )}

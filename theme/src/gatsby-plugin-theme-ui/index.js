@@ -25,6 +25,7 @@ export default {
     meta: '#1f7199',
     built: '#397300',
     literal: '#78A960',
+    highlight: '#ffffcc',
     modes: {
       dark: {
         text: '#fff',
@@ -37,6 +38,7 @@ export default {
         meta: '#1f7199',
         built: '#397300',
         literal: '#78A960',
+        highlight: '#29112c',
       },
       deep: {
         text: 'hsl(210, 50%, 96%)',
@@ -49,6 +51,7 @@ export default {
         meta: '#1f7199',
         built: '#397300',
         literal: '#78A960',
+        highlight: 'hsl(260, 20%, 40%)',
       },
       swiss: {
         text: 'hsl(10, 20%, 20%)',
@@ -61,6 +64,7 @@ export default {
         meta: '#1f7199',
         built: '#397300',
         literal: '#78A960',
+        highlight: 'hsl(10, 40%, 90%)',
       },
     },
   },
