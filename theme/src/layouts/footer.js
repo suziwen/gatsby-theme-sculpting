@@ -10,6 +10,7 @@ const styles = {
   borderTop: '1px solid',
   width: '100%',
   justifyContent: 'space-between',
+  padding: 3,
   h1: {
     m: 0
   },
@@ -27,9 +28,8 @@ export default () => {
 
   return (
           <Flex sx={styles}>
-            <div sx={{ml: 4}}>小书匠</div>
+            <div>小书匠</div>
             <div sx={{
-              mr: 4,
               fontFamily: 'english'
             }}>
               <div>

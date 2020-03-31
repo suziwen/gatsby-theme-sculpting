@@ -1,26 +1,11 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import {MdMenu, MdClose} from "react-icons/md"
 
-const Burger = ({ size = '1em' }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
-    height={size}
-    fill="currentcolor"
-    viewBox="0 0 24 24"
-    sx={{
-      display: 'block',
-      margin: 0,
-    }}
-  >
-    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-  </svg>
-)
-
-export default props => (
+export default ({menuOpen, ...props}) => (
   <button
     title="Toggle Menu"
-    {...props}
+    {... props}
     sx={{
       fontFamily: 'inherit',
       fontSize: 24,
@@ -30,6 +15,7 @@ export default props => (
       height: 32,
       p: 1,
       m: 0,
+      ml: 3,
       border: 0,
       appearance: 'none',
       ':focus': {
@@ -40,6 +26,6 @@ export default props => (
       },
     }}
   >
-    <Burger />
+    {menuOpen?(<MdClose/>):(<MdMenu />)}
   </button>
 )

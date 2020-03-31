@@ -45,9 +45,9 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
 
   return (
       <Headroom>
-        <Flex sx={{ justifyContent: 'space-between' }}>
           <Flex sx={styles}>
             <MenuButton
+              menuOpen={menuOpen}
               onClick={e => {
                 setMenuOpen(!menuOpen)
                 if (!nav.current) return
@@ -56,7 +56,7 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
               }}
             />
             <div sx={{
-              ml: 4,
+              ml: 3,
               fontFamily: 'webfontxiaoshujiang, sans-serif',
               fontWeight: 'bold',
               fontSize: '1.5em'
@@ -72,13 +72,12 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
             <Button
               sx={{
                 ml: ['auto', 2],
-                mr: 4 
+                mr: 3
               }}
               onClick={cycleMode}>
               {mode}
             </Button>
           </Flex>
-        </Flex>
       </Headroom>
   )
 }
