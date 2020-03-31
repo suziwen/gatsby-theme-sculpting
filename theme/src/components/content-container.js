@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 
 const ContentContainer = ({children, ...props})=> {
   return (<div sx={{
-    p: [0, 0, 5],
+    p: [3,  5],
     mx: 'auto',
     my: 0,
     maxWidth: '900px',

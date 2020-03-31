@@ -18,6 +18,11 @@ const tocStyle = (menuOpen)=>{
   maxWidth: `210px`,
   zIndex: 1,
   display: [displayResult, `none`, `none`, `flex`],
+  opacity: .3,
+  transition: `opacity .5s`,
+  '&:hover': {
+    opacity: 1
+  },
   '.toc-list': {
     bg: 'background',
     listStyleType: 'none',
@@ -38,7 +43,7 @@ const tocStyle = (menuOpen)=>{
     },
     '.is-active-link': {
       color: 'text',
-      fontWeigth: 'bold'
+      fontWeight: 'bold'
     },
   },
   top: 0,
@@ -80,7 +85,7 @@ export default ({pageContext, location, children}) => {
                 <div
                   ref={nav}
                   sx={{
-                    display: ['block', 'flex'],
+                    display: ['flex'],
                     flex: 1,
                   }}
                 >
