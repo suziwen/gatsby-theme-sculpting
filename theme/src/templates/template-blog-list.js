@@ -17,7 +17,13 @@ const PostTocItems = ({items, depth=0, maxDepth=3, basePath='/'})=> {
         {items.map((tocItem)=>{
           const link = ("/" + basePath + "/" + tocItem.link).replace(/\/+/g, '/')
           return (<li key={link}>
-            <Link to={link}>
+            <Link
+              to={link}
+              sx={{
+                color: `gray`,
+                textDecoration: `none`,
+              }}
+            >
             {tocItem.title}
             </Link>
             {tocItem.items && (<PostTocItems items={tocItem.items} depth={depth + 1} maxDepth= {maxDepth}/>)}
@@ -84,7 +90,9 @@ class BlogPostsIndex extends React.Component {
                     <Link
                       to={node.slug}
                       sx={{
+                        color: `text`,
                         bg: `background`,
+                        textDecoration: `none`,
                         pr: `1ch`
                       }}
                     >{node.title}

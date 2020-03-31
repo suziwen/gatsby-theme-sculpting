@@ -11,10 +11,10 @@ const CalendarDiv = styled.div`
   }
 
   & table.calendar thead {
-    background-color: #5A5A5A;
-    color: white;
+    background-color: ${props => props.theme.colors.muted};
+    color: ${props => props.theme.colors.text};
     margin-bottom: 3px;
-    border-bottom: 2px solid white
+    border-bottom: 2px solid ${props => props.theme.colors.text};
   }
 
 
@@ -35,8 +35,8 @@ const CalendarDiv = styled.div`
     text-align: center;
     padding: 8px;
     cursor: pointer;
-    border: 1px solid rgba(185, 185, 185, 0.13);
-    background-color: white;
+    border: 1px solid ${props => props.theme.colors.muted};
+    background-color: ${props => props.theme.colors.background};
     min-width: 15px;
   }
 
@@ -56,7 +56,7 @@ const CalendarDiv = styled.div`
     color: transparent;
     cursor: default;
     pointer-events: none;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAABZJREFUCB1jYEADmzdv/o8iRA0BoIEAKngPeSAlnXcAAAAASUVORK5CYII=');
+    background-image: repeating-linear-gradient(135deg,${props => props.theme.colors.muted},transparent 1px,transparent 2px,transparent 2px,${props => props.theme.colors.muted} 3px);
   }
 
   & table.calendar td.week-separator {
@@ -64,7 +64,7 @@ const CalendarDiv = styled.div`
     padding: 0;
     width: 8px;
     min-width: 0;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAABZJREFUCB1jYEADmzdv/o8iRA0BoIEAKngPeSAlnXcAAAAASUVORK5CYII=');
+    background-image: repeating-linear-gradient(135deg,${props => props.theme.colors.muted},transparent 1px,transparent 2px,transparent 2px,${props => props.theme.colors.muted} 3px);
   }
 
   & table.calendar td.bolder {
@@ -73,14 +73,14 @@ const CalendarDiv = styled.div`
 
   /* Single selected day */
   & table.calendar td.selected {
-    background-color: orangered;
-    color: white;
+    background-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.text};
     font-weight: bold;
   }
 
   /* Selected range */
   & table.calendar td.range {
-    background-color: rgba(255,69,0, 0.7);
+    background-color: ${props => props.theme.colors.secondary};
     font-weight: bold;
     color: white;
   }
@@ -89,14 +89,16 @@ const CalendarDiv = styled.div`
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     overflow: hidden;
-    background: orangered;
+    background-color: ${props => props.theme.colors.primary};
+    color: white;
   }
 
   & table.calendar td.range-right {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     overflow: hidden;
-    background: orangered;
+    background-color: ${props => props.theme.colors.primary};
+    color: white;
   }
   /* hot */
   & table.calendar td.hot {
