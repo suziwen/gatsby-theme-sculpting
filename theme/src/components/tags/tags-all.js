@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import { jsx, Button, Flex} from 'theme-ui'
 import React from "react"
-import { Link, graphql, StaticQuery } from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
 import lodash from "lodash"
 import mergePath from '../../utils/merge-path'
+import Link from '../ui-link'
 
 
 const TagsAll = ({ basePath, tag='' }) => {

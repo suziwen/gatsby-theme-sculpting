@@ -2,13 +2,13 @@
 import { jsx, BaseStyles } from "theme-ui"
 import React from "react"
 import Helmet from "react-helmet"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import {MdArrowForward, MdArrowBack} from "react-icons/md"
-import Img from "gatsby-image"
 import TagsSection from "../components/tags/tags-section"
 import Toc from "../components/toc"
 import ProgressIndicator from "../components/progress-indicator"
 import ContentContainer from '../components/content-container'
+import Link from '../components/ui-link'
 
 class BlogPostTemplate extends React.Component {
   render() {

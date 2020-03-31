@@ -1,12 +1,13 @@
 /** @jsx jsx */
 import { jsx, BaseStyles } from "theme-ui"
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Helmet from "react-helmet"
 import get from "lodash/get";
 
 import Pagination from "../components/pagination"
 import ContentContainer from '../components/content-container'
+import Link from '../components/ui-link'
 
 
 const PostTocItems = ({items, depth=0, maxDepth=3, basePath='/'})=> {

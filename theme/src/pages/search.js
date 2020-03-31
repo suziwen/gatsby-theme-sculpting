@@ -4,6 +4,7 @@ import FlexSearch from 'flexsearch'
 import SearchForm from "../components/search/search-form"
 import SearchResults from "../components/search/search-results"
 import ContentContainer from '../components/content-container'
+import Link from '../components/ui-link'
 
 const Search = ({ data, location }) => {
   const [results, setResults] = useState([])

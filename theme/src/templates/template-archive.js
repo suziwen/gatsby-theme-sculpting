@@ -4,11 +4,12 @@ import React from "react"
 import styled from '@emotion/styled'
 import PropTypes from "prop-types"
 import moment from 'moment'
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import {Calendar, CalendarControls} from 'react-yearly-calendar'
 
 import CalendarDiv from '../components/calendar-style'
 import ContentContainer from '../components/content-container'
+import Link from '../components/ui-link'
 
 
 class ArchiveTemplate extends React.Component {

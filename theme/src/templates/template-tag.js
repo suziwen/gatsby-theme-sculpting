@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import { jsx, Heading} from 'theme-ui'
 import React from "react"
-import { Link, graphql } from "gatsby"
-import ContentContainer from '../components/content-container'
+import { graphql } from "gatsby"
 
+import ContentContainer from '../components/content-container'
+import Link from '../components/ui-link'
 import TagsAll from '../components/tags/tags-all'
 
 

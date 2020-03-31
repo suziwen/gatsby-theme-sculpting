@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
-import { Link } from 'gatsby'
 import isAbsoluteURL from 'is-absolute-url'
+import Link from '../components/ui-link'
 
 const styles = {
   display: 'block',
