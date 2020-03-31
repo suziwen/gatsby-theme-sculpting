@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Button} from 'theme-ui'
+import { jsx, Flex, Button, Message} from 'theme-ui'
 import React from "react"
 import styled from '@emotion/styled'
 import PropTypes from "prop-types"
@@ -68,21 +68,25 @@ class ArchiveTemplate extends React.Component {
 
     return (
       <ContentContainer>
-        <h1 sx={{
-          display: 'flex',
-          fontFamily: 'english',
-          textShadow: t => `1px 1px ${t.colors.background}, 2px 2px ${t.colors.text}`,
-          }}>
+        <Flex sx={{
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          mb: 3,
+        }}>
             {years.map((_year)=>{
               const _yearinfo = yearinfo[_year]
-              if (_year === year) {
-                return (<Button key={_year} onClick={this.showThisYear}>{year}</Button>)
-              } else {
-                return (<Link key={_year} to={_yearinfo.slug} >{_year}</Link>)
-              }
+              return (
+                <Link key={_year} to={_yearinfo.slug} sx={{margin: 1}}>
+                  <Button variant={year === _year? 'primary': 'secondary'} sx={{
+                    fontFamily: 'english',
+                  }}>
+                    {_year}
+                  </Button>
+                </Link>
+              )
             })
             }
-        </h1>
+        </Flex>
         <CalendarDiv>
           <Calendar 
             year={parseInt(year)}
@@ -95,7 +99,12 @@ class ArchiveTemplate extends React.Component {
             }}}
           />
         </CalendarDiv>
-        <ul>
+        {!yearinfo[year] || !yearinfo[year].count && (
+          <Message>
+            今年还没有创建任何文章
+          </Message>
+        )}
+        {!!yearinfo[year] && !!yearinfo[year].count && (<ul>
           {group.map(({ edges }) => {
             return edges.map(({ node }) => {
               const title = node.title
@@ -110,7 +119,7 @@ class ArchiveTemplate extends React.Component {
               }
             })
           })}
-        </ul>
+        </ul>)}
       </ContentContainer>
     )
   }
