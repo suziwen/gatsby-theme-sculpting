@@ -2,7 +2,6 @@
 import { jsx, Heading} from 'theme-ui'
 import React from "react"
 import { Link, graphql } from "gatsby"
-import lodash from "lodash"
 import ContentContainer from '../components/content-container'
 
 import TagsAll from '../components/tags/tags-all'
