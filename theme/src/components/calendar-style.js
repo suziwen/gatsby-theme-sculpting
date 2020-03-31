@@ -6,6 +6,7 @@ const CalendarDiv = styled.div`
     box-sizing: content-box;
   }
   & table.calendar {
+    user-select: none;
     transform: translate(-50%,0);
     border-collapse: collapse;
   }
