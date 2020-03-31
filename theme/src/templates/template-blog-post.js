@@ -5,7 +5,7 @@ import Helmet from "react-helmet"
 import { Link, graphql } from "gatsby"
 import {MdArrowForward, MdArrowBack} from "react-icons/md"
 import Img from "gatsby-image"
-import TagsSection from "../components/tags-section"
+import TagsSection from "../components/tags/tags-section"
 import Toc from "../components/toc"
 import ProgressIndicator from "../components/progress-indicator"
 import ContentContainer from '../components/content-container'

@@ -85,7 +85,12 @@ export default {
     },
   },
   buttons: {
+    primary: {
+      bg: `primary`,
+      cursor: 'pointer',
+    },
     secondary: {
+      bg: `secondary`,
       cursor: 'pointer',
     },
   },

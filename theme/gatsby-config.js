@@ -12,7 +12,7 @@ const tokenizerFn = function(str){
 }
 
 module.exports = options => {
-  let { mdx = true, contentPath = 'posts' , docType='posts'} = options
+  let { mdx = true, contentPath = 'posts' , docType='posts', basePath = '/'} = options
   if(!fs.existsSync(contentPath)) {
     // 如果用户未创建 contentPath 目录,就使用主题里默认的 posts
     contentPath = `${__dirname}/posts`
@@ -25,6 +25,14 @@ module.exports = options => {
       description: `一款让你爱不释手的写作软件`
     },
     plugins: [
+      {
+        resolve: 'gatsby-plugin-global-context',
+        options: {
+          context: {
+            basePath: basePath
+          }
+        }
+      },
       {
         resolve: `gatsby-plugin-local-search`,
         options: {

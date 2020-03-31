@@ -20,7 +20,6 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
     const blogPostTemplate = require.resolve(`./src/templates/template-blog-post.js`)
     const paginatedPostsTemplate = require.resolve(`./src/templates/template-blog-list.js`)
     const tagTemplate = require.resolve(`./src/templates/template-tag.js`)
-    const tagsTemplate = require.resolve(`./src/templates/template-tags.js`)
     const archiveTemplate = require.resolve(`./src/templates/template-archive.js`)
     resolve(
       graphql(
@@ -97,18 +96,9 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
                 component: tagTemplate,
                 context: {
                     tag,
-                    basePath: basePath
                 },
             });
         });
-        createPage({
-          path: `/tags/`,
-          component: tagsTemplate,
-          context: {
-            allTags: taginfo,
-            basePath: basePath
-          }
-        })
         // Archive pages:
         const nowYear = new Date().getFullYear() + ''
         yearinfo[nowYear] = 0
@@ -154,7 +144,6 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
             component: blogPostTemplate,
             context: {
               slug: post.node.slug,
-              basePath: basePath,
               prev,
               next
             },
@@ -174,7 +163,6 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
               context:
                   {
                     limit: pageSize,
-                    basePath: basePath,
                     skip: index * pageSize,
                     docType: docType,
                     numPages: Math.ceil(blogPosts.length / pageSize),

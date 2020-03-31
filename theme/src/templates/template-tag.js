@@ -1,11 +1,15 @@
+/** @jsx jsx */
+import { jsx, Heading} from 'theme-ui'
 import React from "react"
-import PropTypes from "prop-types"
 import { Link, graphql } from "gatsby"
+import lodash from "lodash"
 import ContentContainer from '../components/content-container'
+
+import TagsAll from '../components/tags/tags-all'
 
 
 const Tags = ({ pageContext, data, location }) => {
-  const { tag } = pageContext
+  const { tag, basePath } = pageContext
   const { edges, totalCount } = data.allStoryWriterMarkdown
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? `` : `s`
@@ -13,7 +17,8 @@ const Tags = ({ pageContext, data, location }) => {
 
   return (
     <ContentContainer>
-      <h1>{tagHeader}</h1>
+      <Heading>{tagHeader}</Heading>
+      <TagsAll basePath={basePath} tag={tag}/>
       <ul>
         {edges.map(({ node }) => {
           const title = node.title
@@ -25,41 +30,14 @@ const Tags = ({ pageContext, data, location }) => {
           )
         })}
       </ul>
-      <Link to="/tags">All tags</Link>
     </ContentContainer>
   )
-}
-
-Tags.propTypes = {
-  pageContext: PropTypes.shape({
-    tag: PropTypes.string.isRequired,
-  }),
-  data: PropTypes.shape({
-    allStoryWriterMarkdown: PropTypes.shape({
-      totalCount: PropTypes.number.isRequired,
-      edges: PropTypes.arrayOf(
-        PropTypes.shape({
-          node: PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            slug: PropTypes.string.isRequired,
-          }),
-        }).isRequired
-      ),
-    }),
-  }),
 }
 
 export default Tags
 
 export const pageQuery = graphql`
   query TagPage($tag: String) {
-    site {
-      siteMetadata {
-        title
-        description
-        siteUrl
-      }
-    }
     allStoryWriterMarkdown(
       sort: { fields: [updateDate], order: DESC }
       filter: { tags: { in: [$tag] } }
