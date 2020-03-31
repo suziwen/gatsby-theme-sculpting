@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, BaseStyles } from "theme-ui"
+import { jsx, Heading, BaseStyles } from "theme-ui"
 import React from "react"
 import { graphql } from "gatsby"
 import Helmet from "react-helmet"
@@ -65,8 +65,7 @@ class BlogPostsIndex extends React.Component {
             >
               {posts.map(({ node }) => (
                 <div key={node.slug}>
-                  <h1 sx={{
-                    variant: `textStyles.heading`,
+                  <Heading as='h1' sx={{
                     position: 'relative',
                     '&:before': {
                       content: `"................................................................................................................................................."`,
@@ -103,7 +102,7 @@ class BlogPostsIndex extends React.Component {
                       {node.createDate}
                     </span>
                   </Link>
-                  </h1>
+                  </Heading>
                   <PostToc tocStr={node.toc} basePath={basePath}/>
                 </div>
               ))}

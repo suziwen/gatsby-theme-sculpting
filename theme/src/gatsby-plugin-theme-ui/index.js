@@ -1,3 +1,5 @@
+import { base } from '@theme-ui/presets'
+
 const heading = {
   fontFamily: 'heading',
   fontWeight: 'heading',
@@ -9,6 +11,7 @@ const heading = {
 }
 
 export default {
+  ...base,
   initialColorMode: 'light',
   breakpoints: ['650px', '850px', '1200px'],
   colors: {
@@ -76,14 +79,6 @@ export default {
     body: 1.5,
     heading: 1.25,
   },
-  textStyles: {
-    heading,
-    display: {
-      variant: 'textStyles.heading',
-      fontSize: [5, 6, 7],
-      mt: 3,
-    },
-  },
   buttons: {
     primary: {
       bg: `primary`,
@@ -95,6 +90,7 @@ export default {
     },
   },
   styles: {
+    ...base.styles,
     Container: {
       p: 3,
       maxWidth: 1024,
@@ -103,29 +99,6 @@ export default {
       fontFamily: 'body',
       lineHeight: 'body',
       fontWeight: 'body',
-    },
-    h1: {
-      variant: 'textStyles.display',
-    },
-    h2: {
-      variant: 'textStyles.heading',
-      fontSize: 5,
-    },
-    h3: {
-      variant: 'textStyles.heading',
-      fontSize: 4,
-    },
-    h4: {
-      variant: 'textStyles.heading',
-      fontSize: 3,
-    },
-    h5: {
-      variant: 'textStyles.heading',
-      fontSize: 2,
-    },
-    h6: {
-      variant: 'textStyles.heading',
-      fontSize: 1,
     },
     a: {
       color: 'primary',
