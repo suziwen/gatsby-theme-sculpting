@@ -36,7 +36,7 @@ const Search = ({ data, location }) => {
 
   return (
     <ContentContainer>
-      <SearchForm query={searchQuery} />
+      <SearchForm query={searchQuery}/>
       <SearchResults query={searchQuery} results={results} />
     </ContentContainer>
   )

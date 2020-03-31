@@ -4,12 +4,13 @@ import Highlighter from "react-highlight-words"
 const SearchResults = ({ query, results }) => (
   <section aria-label="Search results for all posts">
     {!!results.length && query && (
-      <h2
-        className="search-results-count"
-        id="search-results-count"
-        aria-live="assertive"
-      >
+      <h2>
         Found {results.length} posts on "{query}"
+      </h2>
+    )}
+    {!results.length && query &&(
+      <h2>
+        Not Found post on "{query}"
       </h2>
     )}
     {!!results.length && (
