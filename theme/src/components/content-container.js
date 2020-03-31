@@ -9,6 +9,7 @@ const ContentContainer = ({children, ...props})=> {
     p: [3,  5],
     mx: 'auto',
     my: 0,
+    minHeight: '100%',
     maxWidth: '900px',
   }} {...props}>
     {children}

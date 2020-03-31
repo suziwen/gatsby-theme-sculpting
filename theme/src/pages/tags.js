@@ -10,7 +10,6 @@ const Tags = ({ pageContext: { basePath } }) => {
   return (
     <ContentContainer sx={{
       display: 'flex',
-      minHeight: '100%',
       alignItems: 'center',
       alignContent: 'center',
     }}>

@@ -20,7 +20,7 @@ export default ({ href, children, ...props }) => {
   const isExternal = isAbsoluteURL(href || '')
 
   if (isExternal) {
-    return <a {...props} href={href} sx={styles}>{children}</a>
+    return <a {...props} href={href} sx={styles} target="_blank">{children}</a>
   }
   const { theme } = useThemeUI()
 
