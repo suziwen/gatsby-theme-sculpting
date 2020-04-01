@@ -13,6 +13,7 @@ import Toc from "../components/toc"
 import ProgressIndicator from "../components/progress-indicator"
 import ContentContainer from '../components/content-container'
 import mergePath from '../utils/merge-path'
+import MD5 from '../utils/md5'
 import Link from '../components/ui-link'
 
 class BlogPostTemplate extends React.Component {
@@ -39,7 +40,7 @@ class BlogPostTemplate extends React.Component {
     if (process.env.COMMENT_WIDGET === "disqus" && !!process.env.DISQUS_SHORT_NAME) {
       disqusConfig = {
         url: siteUrl + mergePath(basePath, post.slug),
-        identifier: post.slug || post.id,
+        identifier: MD5(post.slug || post.id),
         title: post.title
       }
     }
@@ -51,7 +52,7 @@ class BlogPostTemplate extends React.Component {
         repo: process.env.GITALK_REPO,
         owner: process.env.GITALK_OWNER,
         admin: [process.env.GITALK_ADMIN],
-        id: post.slug || post.id,
+        id: MD5(post.slug || post.id),
         title: post.title
       }
     }
