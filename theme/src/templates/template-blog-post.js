@@ -4,13 +4,16 @@ import React from "react"
 import Helmet from "react-helmet"
 import { graphql } from "gatsby"
 import {MdArrowForward, MdArrowBack} from "react-icons/md"
+import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
+import 'gitalk/dist/gitalk.css'
+import Gitalk from 'gitalk'
+import GitalkComponent from "gitalk/dist/gitalk-component"
 import TagsSection from "../components/tags/tags-section"
 import Toc from "../components/toc"
 import ProgressIndicator from "../components/progress-indicator"
 import ContentContainer from '../components/content-container'
 import mergePath from '../utils/merge-path'
 import Link from '../components/ui-link'
-import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -33,10 +36,22 @@ class BlogPostTemplate extends React.Component {
 
     const postHtmlAndCss = `<style>${post.customCss}</style>\n${post.html}`
     let disqusConfig = null
-    if (!!process.env.DISQUS_SHORT_NAME) {
+    if (process.env.COMMENT_WIDGET === "disqus" && !!process.env.DISQUS_SHORT_NAME) {
       disqusConfig = {
         url: siteUrl + mergePath(basePath, post.slug),
         identifier: post.slug || post.id,
+        title: post.title
+      }
+    }
+    let gitalkConfig = null
+    if (process.env.COMMENT_WIDGET === "gitalk") {
+      gitalkConfig = {
+        clientID: process.env.GITALK_CLIENT_ID,
+        clientSecret: process.env.GITALK_CLIENT_SECRET,
+        repo: process.env.GITALK_REPO,
+        owner: process.env.GITALK_OWNER,
+        admin: [process.env.GITALK_ADMIN],
+        id: post.slug || post.id,
         title: post.title
       }
     }
@@ -119,6 +134,15 @@ class BlogPostTemplate extends React.Component {
           </div>
           {!!disqusConfig && (<CommentCount config={disqusConfig} placeholder={'...'} />)}
           {!!disqusConfig && (<Disqus config={disqusConfig} />)}
+          {!!gitalkConfig && (<GitalkComponent
+            clientID={gitalkConfig.clientID}
+            clientSecret={gitalkConfig.clientSecret}
+            repo={gitalkConfig.repo}
+            owner={gitalkConfig.owner}
+            admin={gitalkConfig.admin}
+            title={gitalkConfig.title}
+            id={gitalkConfig.id}
+          />)}
           
         </ContentContainer>
 

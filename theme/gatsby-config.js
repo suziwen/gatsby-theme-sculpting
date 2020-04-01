@@ -104,7 +104,7 @@ module.exports = options => {
 
   ]
 
-  if (process.env.DISQUS_SHORT_NAME) {
+  if ( process.env.COMMENT_WIDGET === "disqus" && process.env.DISQUS_SHORT_NAME) {
     plugins.push({
       resolve: `gatsby-plugin-disqus`,
       options: {
