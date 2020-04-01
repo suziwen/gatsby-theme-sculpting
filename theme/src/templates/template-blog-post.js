@@ -8,14 +8,18 @@ import TagsSection from "../components/tags/tags-section"
 import Toc from "../components/toc"
 import ProgressIndicator from "../components/progress-indicator"
 import ContentContainer from '../components/content-container'
+import mergePath from '../utils/merge-path'
 import Link from '../components/ui-link'
+import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
 
 class BlogPostTemplate extends React.Component {
   render() {
     const props = this.props
     const post = this.props.data.storyWriterMarkdown;
+    const siteUrl = this.props.data.site.siteMetadata.siteUrl
     const prev = this.props.pageContext.prev
     const next = this.props.pageContext.next
+    const basePath = this.props.pageContext.basePath
     const location = this.props.location
     const BioLine = ({ children }) => (
       <p
@@ -28,6 +32,14 @@ class BlogPostTemplate extends React.Component {
     )
 
     const postHtmlAndCss = `<style>${post.customCss}</style>\n${post.html}`
+    let disqusConfig = null
+    if (!!process.env.DISQUS_SHORT_NAME) {
+      disqusConfig = {
+        url: siteUrl + mergePath(basePath, post.slug),
+        identifier: post.slug || post.id,
+        title: post.title
+      }
+    }
 
     return (
         <ContentContainer>
@@ -105,6 +117,9 @@ class BlogPostTemplate extends React.Component {
               )}
             </div>
           </div>
+          {!!disqusConfig && (<CommentCount config={disqusConfig} placeholder={'...'} />)}
+          {!!disqusConfig && (<Disqus config={disqusConfig} />)}
+          
         </ContentContainer>
 
     )
@@ -126,6 +141,7 @@ export const pageQuery = graphql`
       html
       excerpt
       docType
+      slug
       title
       customCss
       createDate(formatString: "MMMM DD, YYYY")

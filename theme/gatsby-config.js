@@ -1,8 +1,6 @@
 require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`,
 })
-console.log('*************8')
-console.log(process.env.DISQUS_SHORT_NAME)
 const fs = require('fs')
 const nodejieba = require("nodejieba")
 
@@ -16,11 +14,103 @@ const tokenizerFn = function(str){
   return results
 }
 
+
 module.exports = options => {
   let { mdx = true, contentPath = 'posts' , docType='posts', basePath = '/'} = options
   if(!fs.existsSync(contentPath)) {
     // 如果用户未创建 contentPath 目录,就使用主题里默认的 posts
     contentPath = `${__dirname}/posts`
+  }
+
+  const plugins = [
+    {
+      resolve: 'gatsby-plugin-global-context',
+      options: {
+        context: {
+          basePath: basePath
+        }
+      }
+    },
+    {
+      resolve: `gatsby-plugin-local-search`,
+      options: {
+        name: 'pages',
+        engine: 'flexsearch',
+        engineOptions: {
+          encode: 'icase',
+          tokenize: tokenizerFn,
+          threshold: 1,
+          resolution: 3,
+          depth: 1,
+          split: /[\s\,\.\!\?\:]+/
+        },
+        query: `
+          {
+            allStoryWriterMarkdown {
+              nodes {
+                id
+                title
+                tags
+                slug
+                rawMarkdownBody
+              }
+            }
+          }
+        `,
+        ref: `id`,
+        index: ['title', 'body'],
+        store: ['id', 'slug', 'title'],
+        normalizer: ({ data }) =>
+          data.allStoryWriterMarkdown.nodes.map(node => ({
+            id: node.id,
+            slug: node.slug,
+            title: node.title,
+            body: node.rawMarkdownBody,
+          })),
+      }
+    },
+    {
+      resolve: "gatsby-plugin-layout",
+      options: {
+        component: require.resolve(`./src/layouts/index.js`)
+      }
+    },
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `#9D7CBF`,
+        showSpinner: true
+      }
+    },
+    "gatsby-plugin-theme-ui",
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/covers`,
+        name: 'covers'
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: contentPath,
+        name: docType
+      }
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-mdx`,
+    "gatsby-transformer-xsjzip"
+
+  ]
+
+  if (process.env.DISQUS_SHORT_NAME) {
+    plugins.push({
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: process.env.DISQUS_SHORT_NAME
+      }
+    })
   }
 
   return {
@@ -29,85 +119,6 @@ module.exports = options => {
       siteUrl: "http://www.xiaoshujiang.com",
       description: `一款让你爱不释手的写作软件`
     },
-    plugins: [
-      {
-        resolve: 'gatsby-plugin-global-context',
-        options: {
-          context: {
-            basePath: basePath
-          }
-        }
-      },
-      {
-        resolve: `gatsby-plugin-local-search`,
-        options: {
-          name: 'pages',
-          engine: 'flexsearch',
-          engineOptions: {
-            encode: 'icase',
-            tokenize: tokenizerFn,
-            threshold: 1,
-            resolution: 3,
-            depth: 1,
-            split: /[\s\,\.\!\?\:]+/
-          },
-          query: `
-            {
-              allStoryWriterMarkdown {
-                nodes {
-                  id
-                  title
-                  tags
-                  slug
-                  rawMarkdownBody
-                }
-              }
-            }
-          `,
-          ref: `id`,
-          index: ['title', 'body'],
-          store: ['id', 'slug', 'title'],
-          normalizer: ({ data }) =>
-            data.allStoryWriterMarkdown.nodes.map(node => ({
-              id: node.id,
-              slug: node.slug,
-              title: node.title,
-              body: node.rawMarkdownBody,
-            })),
-        }
-      },
-      {
-        resolve: "gatsby-plugin-layout",
-        options: {
-          component: require.resolve(`./src/layouts/index.js`)
-        }
-      },
-      {
-        resolve: `gatsby-plugin-nprogress`,
-        options: {
-          color: `#9D7CBF`,
-          showSpinner: true
-        }
-      },
-      "gatsby-plugin-theme-ui",
-      {
-        resolve: `gatsby-source-filesystem`,
-        options: {
-          path: `${__dirname}/src/covers`,
-          name: 'covers'
-        }
-      },
-      {
-        resolve: `gatsby-source-filesystem`,
-        options: {
-          path: contentPath,
-          name: docType
-        }
-      },
-      `gatsby-transformer-sharp`,
-      `gatsby-plugin-sharp`,
-      `gatsby-plugin-mdx`,
-      "gatsby-transformer-xsjzip"
-    ]
+    plugins: plugins
   }
 }
