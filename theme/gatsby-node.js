@@ -2,6 +2,11 @@ const _ = require(`lodash`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
 const moment = require(`moment`)
+const mergePath = (basePath = '/', path = '')=>{
+  let result = "/" + basePath + "/" + path
+  result = result.replace(/\/+/g, '/')
+  return result
+}
 
 
 const getRandomInt = function (min, max) {
@@ -92,7 +97,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
             const count = taginfo[tag]
             taginfo[tag] = {slug: tagSlug, count: count}
             createPage({
-                path: tagSlug,
+                path: mergePath(basePath, tagSlug),
                 component: tagTemplate,
                 context: {
                     tag,
@@ -108,9 +113,9 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
             archiveSlug = '/archives'
           }
           const count = yearinfo[year]
-          yearinfo[year] = {slug: archiveSlug, count: count}
+          yearinfo[year] = {slug: mergePath(basePath, archiveSlug), count: count}
           createPage({
-            path: archiveSlug,
+            path: mergePath(basePath, archiveSlug),
             component: archiveTemplate,
             context: {
               year,
@@ -136,11 +141,8 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
           let prev =
             index === blogPosts.length - 1 ? null : blogPosts[index + 1].node
           prev = wrapperNode(prev);
-          let slug = post.node.slug;
-          // 删除多个重复的 / 符号
-          slug = slug.replace(/\/+/g, `/`)
           createPage({
-            path: slug,
+            path: mergePath(basePath, post.node.slug),
             component: blogPostTemplate,
             context: {
               slug: post.node.slug,
@@ -158,7 +160,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
             path = `/page/${index+1}/`
           }
           createPage({
-              path: path,
+              path: mergePath(basePath, path),
               component: paginatedPostsTemplate,
               context:
                   {
@@ -188,14 +190,7 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
 
 exports.onCreateNode = ({ node, actions, getNodesByType, getNodes }, pluginOptions) => {
   const { createNode, createNodeField } = actions
-  const basePath = pluginOptions.basePath || '/';
   if (node.internal.type === 'StoryWriterMarkdown') {
-    if (node.slug) {
-      let slug = node.slug
-      slug = '/' + basePath + '/' + slug
-      slug = slug.replace(/\/+/g, '/')
-      node.slug = slug
-    }
     node.createYear= moment(node.createDate).format('YYYY')
     node.createYearMonth= moment(node.createDate).format('YYYYMM')
     node.createYearMonthDay= moment(node.createDate).format('YYYYMMDD')

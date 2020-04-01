@@ -10,6 +10,7 @@ import {Calendar, CalendarControls} from 'react-yearly-calendar'
 import CalendarDiv from '../components/calendar-style'
 import ContentContainer from '../components/content-container'
 import Link from '../components/ui-link'
+import mergePath from '../utils/merge-path'
 
 
 class ArchiveTemplate extends React.Component {
@@ -60,7 +61,7 @@ class ArchiveTemplate extends React.Component {
   render() {
     const {pageContext, data} = this.props
     const {selectedRange, selectedDay, showAll, dayInfo} = this.state
-    const { year, yearinfo } = pageContext
+    const { year, yearinfo, basePath } = pageContext
     const { group } = data.allStoryWriterMarkdown
     const years = Object.keys(yearinfo)
     const today = moment()
@@ -114,7 +115,7 @@ class ArchiveTemplate extends React.Component {
               if (showAll || (startDateStr <= createDate && endDateStr >= createDate)) {
                 return (
                   <li key={slug}>
-                    <Link to={slug}>{title}</Link>
+                    <Link to={mergePath(basePath, slug)}>{title}</Link>
                   </li>
                 )
               }

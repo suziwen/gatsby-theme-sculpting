@@ -8,6 +8,7 @@ import get from "lodash/get";
 import Pagination from "../components/pagination"
 import ContentContainer from '../components/content-container'
 import Link from '../components/ui-link'
+import mergePath from '../utils/merge-path'
 
 
 const PostTocItems = ({items, depth=0, maxDepth=3, basePath='/'})=> {
@@ -15,10 +16,9 @@ const PostTocItems = ({items, depth=0, maxDepth=3, basePath='/'})=> {
     return (
       <ul>
         {items.map((tocItem)=>{
-          const link = ("/" + basePath + "/" + tocItem.link).replace(/\/+/g, '/')
-          return (<li key={link}>
+          return (<li key={tocItem.link}>
             <Link
-              to={link}
+              to={mergePath(basePath, tocItem.link)}
               sx={{
                 color: `gray`,
                 textDecoration: `none`,
@@ -88,7 +88,7 @@ class BlogPostsIndex extends React.Component {
                     }
                   }}>
                     <Link
-                      to={node.slug}
+                      to={mergePath(basePath, node.slug)}
                       sx={{
                         color: `text`,
                         bg: `background`,

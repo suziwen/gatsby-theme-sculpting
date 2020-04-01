@@ -6,6 +6,7 @@ import { graphql } from "gatsby"
 import ContentContainer from '../components/content-container'
 import Link from '../components/ui-link'
 import TagsAll from '../components/tags/tags-all'
+import mergePath from '../utils/merge-path'
 
 
 const Tags = ({ pageContext, data, location }) => {
@@ -25,7 +26,7 @@ const Tags = ({ pageContext, data, location }) => {
           const slug = node.slug
           return (
             <li key={slug}>
-              <Link to={slug}>{title}</Link>
+              <Link to={mergePath(basePath, slug)}>{title}</Link>
             </li>
           )
         })}

@@ -10,6 +10,7 @@ import ProgressIndicator from "../components/progress-indicator"
 import ContentContainer from '../components/content-container'
 import Link from '../components/ui-link'
 import Comments from '../components/comments'
+import mergePath from '../utils/merge-path'
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -79,7 +80,7 @@ class BlogPostTemplate extends React.Component {
           }}>
             <div sx={{flex: 1, textAlign: `left`}}>
               {prev && (
-                <Link to={prev.slug}>
+                <Link to={mergePath(basePath, prev.slug)}>
                   <h4 sx={{
                     fontFamily: 'english'
                   }}>
@@ -94,7 +95,7 @@ class BlogPostTemplate extends React.Component {
             </div>
             <div sx={{flex: 1, textAlign: `right`}}>
               {next && (
-                <Link to={next.slug}>
+                <Link to={mergePath(basePath, next.slug)}>
                   <h4 sx={{
                     fontFamily: 'english'
                   }}>Next
