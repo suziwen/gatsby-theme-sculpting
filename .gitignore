@@ -1,4 +1,5 @@
 .cache
+.env.*
 public
 node_modules
 example/posts

@@ -1,3 +1,8 @@
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
+console.log('*************8')
+console.log(process.env.DISQUS_SHORT_NAME)
 const fs = require('fs')
 const nodejieba = require("nodejieba")
 
