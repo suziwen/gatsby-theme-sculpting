@@ -4,17 +4,12 @@ import React from "react"
 import Helmet from "react-helmet"
 import { graphql } from "gatsby"
 import {MdArrowForward, MdArrowBack} from "react-icons/md"
-import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
-import 'gitalk/dist/gitalk.css'
-import Gitalk from 'gitalk'
-import GitalkComponent from "gitalk/dist/gitalk-component"
 import TagsSection from "../components/tags/tags-section"
 import Toc from "../components/toc"
 import ProgressIndicator from "../components/progress-indicator"
 import ContentContainer from '../components/content-container'
-import mergePath from '../utils/merge-path'
-import MD5 from '../utils/md5'
 import Link from '../components/ui-link'
+import Comments from '../components/comments'
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -36,26 +31,6 @@ class BlogPostTemplate extends React.Component {
     )
 
     const postHtmlAndCss = `<style>${post.customCss}</style>\n${post.html}`
-    let disqusConfig = null
-    if (process.env.COMMENT_WIDGET === "disqus" && !!process.env.DISQUS_SHORT_NAME) {
-      disqusConfig = {
-        url: siteUrl + mergePath(basePath, post.slug),
-        identifier: MD5(post.slug || post.id),
-        title: post.title
-      }
-    }
-    let gitalkConfig = null
-    if (process.env.COMMENT_WIDGET === "gitalk") {
-      gitalkConfig = {
-        clientID: process.env.GITALK_CLIENT_ID,
-        clientSecret: process.env.GITALK_CLIENT_SECRET,
-        repo: process.env.GITALK_REPO,
-        owner: process.env.GITALK_OWNER,
-        admin: [process.env.GITALK_ADMIN],
-        id: MD5(post.slug || post.id),
-        title: post.title
-      }
-    }
 
     return (
         <ContentContainer>
@@ -133,12 +108,7 @@ class BlogPostTemplate extends React.Component {
               )}
             </div>
           </div>
-          {!!disqusConfig && (<CommentCount config={disqusConfig} placeholder={'...'} />)}
-          {!!disqusConfig && (<Disqus config={disqusConfig} />)}
-          {!!gitalkConfig && (<GitalkComponent
-            options={gitalkConfig}
-          />)}
-          
+          <Comments  post={post} siteUrl={siteUrl} basePath={basePath}/>
         </ContentContainer>
 
     )
