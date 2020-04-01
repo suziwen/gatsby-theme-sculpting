@@ -135,13 +135,7 @@ class BlogPostTemplate extends React.Component {
           {!!disqusConfig && (<CommentCount config={disqusConfig} placeholder={'...'} />)}
           {!!disqusConfig && (<Disqus config={disqusConfig} />)}
           {!!gitalkConfig && (<GitalkComponent
-            clientID={gitalkConfig.clientID}
-            clientSecret={gitalkConfig.clientSecret}
-            repo={gitalkConfig.repo}
-            owner={gitalkConfig.owner}
-            admin={gitalkConfig.admin}
-            title={gitalkConfig.title}
-            id={gitalkConfig.id}
+            options={gitalkConfig}
           />)}
           
         </ContentContainer>
