@@ -4,6 +4,12 @@ require("dotenv").config({
 const fs = require('fs')
 const nodejieba = require("nodejieba")
 
+const mergePath = (basePath = '/', path = '')=>{
+  let result = "/" + basePath + "/" + path
+  result = result.replace(/\/+/g, '/')
+  return result
+}
+
 const tokenizerFn = function(str){
   let results = []
   const enStrs = str.split(/\W+/)
@@ -103,6 +109,64 @@ module.exports = options => {
     "gatsby-transformer-xsjzip"
 
   ]
+
+  plugins.push(
+  {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        feeds: [
+          {
+            query: `
+              {
+                allStoryWriterMarkdown(
+                  sort: { order: DESC, fields: [createDate] }
+                  filter: {
+                    docType: {eq: "${docType}"}
+                  }
+                ) {
+                  edges {
+                    node {
+                      excerpt
+                      html
+                      title
+                      createDate
+                      updateDate
+                      tags
+                      slug
+                    }
+                  }
+                }
+              }
+            `,
+            output: mergePath(basePath, `/rss.xml`),
+            setup: ({
+              query: {
+                site: { siteMetadata },
+              },
+            }) => {
+              return {
+                title: siteMetadata.title,
+                description: siteMetadata.description,
+                feed_url: siteMetadata.siteUrl + mergePath(basePath, `/rss.xml`),
+                site_url: siteMetadata.siteUrl,
+                generator: `StoryWriter`,
+              }
+            },
+            serialize: ({ query: { site, allStoryWriterMarkdown } }) =>
+              allStoryWriterMarkdown.edges.map(({ node }) => {
+                return {
+                  title: node.title,
+                  description: node.excerpt,
+                  url: site.siteMetadata.siteUrl + mergePath(basePath , node.slug),
+                  guid: site.siteMetadata.siteUrl + mergePath(basePath, node.slug),
+                  custom_elements: [{ "content:encoded": node.html }],
+                }
+              }),
+          },
+        ],
+      },
+    },
+  )
 
   if ( process.env.COMMENT_WIDGET === "disqus" && process.env.DISQUS_SHORT_NAME) {
     plugins.push({
