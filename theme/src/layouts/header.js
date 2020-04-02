@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Container, Flex, useColorMode } from 'theme-ui'
+import { jsx, Container, Flex, useColorMode, useThemeUI } from 'theme-ui'
 import React from "react"
 import { MDXProvider } from '@mdx-js/react'
 
@@ -9,8 +9,6 @@ import MenuButton from './menu-button'
 import NavLink from './nav-link'
 import Content from '../header.mdx'
 import Button from './button'
-
-const modes = ['light', 'dark', 'deep', 'swiss']
 
 const components = {
   a: NavLink
@@ -36,8 +34,11 @@ const styles = {
 
 export default ({ menuOpen, setMenuOpen, nav }) => {
   const [mode, setMode] = useColorMode()
+  const { theme: { colors = {} } } = useThemeUI()
 
   const cycleMode = e => {
+    const modes = ['light']
+    Object.keys( colors.modes || {} ).forEach((_mode)=> modes.push(_mode))
     const i = modes.indexOf(mode)
     const next = modes[(i + 1) % modes.length]
     setMode(next)
