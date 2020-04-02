@@ -2,17 +2,18 @@ import React from "react"
 import lodash from "lodash"
 
 import Link from '../ui-link'
+import Tag from './tag'
 import mergePath from '../../utils/merge-path'
 
 const _ = require(`lodash`)
 
-const TagsSection = ({ tags, basePath }) => {
+const TagsSection = ({ tags }) => {
   if (!tags) return null
   const tagLinks = tags.map((tag, i) => {
     const divider = i < tags.length - 1 && <span>{` | `}</span>
     return (
       <span key={tag}>
-        <Link to={mergePath(basePath, `/tags/${lodash.kebabCase(tag)}`)}>{tag}</Link>
+        <Tag tag={tag}>{tag}</Tag>
         {divider}
       </span>
     )

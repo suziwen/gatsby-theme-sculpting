@@ -22,18 +22,20 @@ const tokenizerFn = function(str){
 
 
 module.exports = options => {
-  let { mdx = true, contentPath = 'posts' , docType='posts', basePath = '/'} = options
+  let { mdx = true, contentPath = 'posts' , docType='posts', basePath = '/', tagsPath = 'tags', archivesPath ='archives'} = options
   if(!fs.existsSync(contentPath)) {
     // 如果用户未创建 contentPath 目录,就使用主题里默认的 posts
     contentPath = `${__dirname}/posts`
   }
+  tagsPath = mergePath('', '/' + tagsPath + '/')
+  archivesPath = mergePath('', '/' + archivesPath + '/')
 
   const plugins = [
     {
       resolve: 'gatsby-plugin-global-context',
       options: {
         context: {
-          basePath: basePath
+          basePath: basePath,
         }
       }
     },
@@ -182,7 +184,10 @@ module.exports = options => {
       title: "小书匠",
       siteUrl: "http://www.xiaoshujiang.com",
       author: "suziwen",
-      description: `一款让你爱不释手的写作软件`
+      description: `一款让你爱不释手的写作软件`,
+      basePath: basePath,
+      tagsPath: tagsPath,
+      archivesPath: archivesPath
     },
     plugins: plugins
   }

@@ -11,6 +11,17 @@ import mergePath from '../utils/merge-path'
 
 const Tags = ({ pageContext, data, location }) => {
   const { tag, basePath } = pageContext
+  if (tag === '________none') {
+    return (
+      <ContentContainer sx={{
+        display: 'flex',
+        alignItems: 'center',
+        alignContent: 'center',
+      }}>
+        <TagsAll />
+      </ContentContainer>
+    )
+  }
   const { edges, totalCount } = data.allStoryWriterMarkdown
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? `` : `s`
@@ -19,7 +30,7 @@ const Tags = ({ pageContext, data, location }) => {
   return (
     <ContentContainer>
       <Heading>{tagHeader}</Heading>
-      <TagsAll basePath={basePath} tag={tag}/>
+      <TagsAll tag={tag}/>
       <ol>
         {edges.map(({ node }) => {
           const title = node.title

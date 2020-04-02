@@ -4,11 +4,12 @@ import React from "react"
 import { graphql, StaticQuery } from "gatsby"
 import lodash from "lodash"
 
+import Tag from './tag'
 import mergePath from '../../utils/merge-path'
 import Link from '../ui-link'
 
 
-const TagsAll = ({ basePath, tag='' }) => {
+const TagsAll = ({ tag='' }) => {
   return (
     <StaticQuery
       query={graphql`
@@ -27,11 +28,11 @@ const TagsAll = ({ basePath, tag='' }) => {
           <Flex sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
             {tagStatics.map(({fieldValue, totalCount}) => {
               return (
-                <Link key={fieldValue} to={mergePath(basePath, `/tags/${lodash.kebabCase(fieldValue)}`)} sx={{margin: 1}}>
+                <Tag key={fieldValue} tag={fieldValue} sx={{margin: 1}}>
                   <Button variant={tag === fieldValue? 'primary': 'secondary'}>
                     {fieldValue}({totalCount})
                   </Button>
-                </Link>
+                </Tag>
               )
             })}
           </Flex>

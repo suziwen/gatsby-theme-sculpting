@@ -20,6 +20,10 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
   const docType =  pluginOptions.docType || 'posts';
   const pageSize = pluginOptions.pageSize ||  4;
   const basePath = pluginOptions.basePath || '/';
+  let tagsPath = pluginOptions.tagsPath || 'tags';
+  let archivesPath = pluginOptions.archivesPath || 'archives';
+  tagsPath = mergePath('', '/' + tagsPath + '/')
+  archivesPath = mergePath('', '/' + archivesPath + '/')
 
   return new Promise((resolve, reject) => {
     const blogPostTemplate = require.resolve(`./src/templates/template-blog-post.js`)
@@ -93,7 +97,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
         });
         // Make tag pages
         Object.keys(taginfo).forEach(tag => {
-            const tagSlug = `/tags/${_.kebabCase(tag)}/`
+            const tagSlug = `${tagsPath}${_.kebabCase(tag)}/`
             const count = taginfo[tag]
             taginfo[tag] = {slug: tagSlug, count: count}
             createPage({
@@ -104,13 +108,20 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
                 },
             });
         });
+        createPage({
+            path: mergePath(basePath, tagsPath),
+            component: tagTemplate,
+            context: {
+              tag: '________none',
+            },
+        });
         // Archive pages:
         const nowYear = new Date().getFullYear() + ''
         yearinfo[nowYear] = 0
         Object.keys(yearinfo).forEach(year => {
-          let archiveSlug = `/archives/${year}/`
+          let archiveSlug = `${archivesPath}${year}/`
           if (year === nowYear) {
-            archiveSlug = '/archives'
+            archiveSlug = archivesPath
           }
           const count = yearinfo[year]
           yearinfo[year] = {slug: mergePath(basePath, archiveSlug), count: count}
