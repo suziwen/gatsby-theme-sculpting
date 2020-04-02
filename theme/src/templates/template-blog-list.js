@@ -1,8 +1,7 @@
 /** @jsx jsx */
-import { jsx, Heading, BaseStyles } from "theme-ui"
+import { jsx, Heading } from "theme-ui"
 import React from "react"
 import { graphql } from "gatsby"
-import Helmet from "react-helmet"
 import get from "lodash/get";
 
 import Pagination from "../components/pagination"
@@ -49,12 +48,6 @@ const PostToc = ({tocStr, basePath})=>{
 
 class BlogPostsIndex extends React.Component {
   render() {
-    const siteTitle = get(this, "props.data.site.siteMetadata.title");
-    const siteDescription = get(
-      this,
-      "props.data.site.siteMetadata.description"
-    );
-    const siteUrl = get(this, "props.data.site.siteMetadata.siteUrl");
     const posts = get(this, "props.data.allStoryWriterMarkdown.edges");
     const pagesTotal = get(this, "props.pageContext.pagesTotal");
     const currentPage = get(this, "props.pageContext.currentPage");
@@ -62,13 +55,7 @@ class BlogPostsIndex extends React.Component {
 
     return (
           <ContentContainer>
-            <Helmet bodyAttributes={{
-              class: "roadbike-blog-list"
-            }}>
-              <title>博客列表</title>
-            </Helmet>
-            <div
-            >
+            <div>
               {posts.map(({ node }) => (
                 <div key={node.slug}>
                   <Heading as='h1' sx={{
@@ -125,13 +112,6 @@ export default BlogPostsIndex
 
 export const pageQuery = graphql`
   query IndexQuery($docType: String, $limit: Int, $skip: Int) {
-    site {
-      siteMetadata {
-        title
-        description
-        siteUrl
-      }
-    }
     allStoryWriterMarkdown(
       limit: $limit
       skip: $skip

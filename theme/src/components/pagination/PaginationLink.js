@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Button} from 'theme-ui'
 import React from "react"
+
 import Link from '../ui-link'
 
 const PaginationLink = ({ to, children, ...props }) => {

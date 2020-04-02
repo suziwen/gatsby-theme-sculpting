@@ -1,7 +1,8 @@
 import React from "react"
+import lodash from "lodash"
+
 import Link from '../ui-link'
 import mergePath from '../../utils/merge-path'
-import lodash from "lodash"
 
 const _ = require(`lodash`)
 

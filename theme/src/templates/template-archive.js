@@ -1,11 +1,9 @@
 /** @jsx jsx */
 import { jsx, Flex, Button, Message} from 'theme-ui'
 import React from "react"
-import styled from '@emotion/styled'
-import PropTypes from "prop-types"
 import moment from 'moment'
 import { graphql } from "gatsby"
-import {Calendar, CalendarControls} from 'react-yearly-calendar'
+import {Calendar} from 'react-yearly-calendar'
 
 import CalendarDiv from '../components/calendar-style'
 import ContentContainer from '../components/content-container'
@@ -106,7 +104,7 @@ class ArchiveTemplate extends React.Component {
             今年还没有创建任何文章
           </Message>
         )}
-        {!!yearinfo[year] && !!yearinfo[year].count && (<ul>
+        {!!yearinfo[year] && !!yearinfo[year].count && (<ol>
           {group.map(({ edges }) => {
             return edges.map(({ node }) => {
               const title = node.title
@@ -121,7 +119,7 @@ class ArchiveTemplate extends React.Component {
               }
             })
           })}
-        </ul>)}
+        </ol>)}
       </ContentContainer>
     )
   }
@@ -132,14 +130,6 @@ export default ArchiveTemplate
 
 export const pageQuery = graphql`
   query ($year: Date) {
-    site {
-      siteMetadata {
-        title
-        description
-        siteUrl
-      }
-    }
-
     allStoryWriterMarkdown(
       sort: { fields: [updateDate], order: DESC }
       filter: {createYear: {eq: $year}}

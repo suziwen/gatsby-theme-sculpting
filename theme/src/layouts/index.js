@@ -1,12 +1,11 @@
 /** @jsx jsx */
+import { jsx, useThemeUI } from 'theme-ui'
+import { Global } from '@emotion/core'
 import React, { useState, useRef } from "react"
-import { navigate, PageRenderer } from "gatsby"
+import { navigate } from "gatsby"
+
 import SiteMetadata from "../components/site-metadata"
 import ContextConsumer, { ContextProviderComponent } from "../components/context"
-
-import { Global } from '@emotion/core'
-import { Styled, Container, jsx, useThemeUI } from 'theme-ui'
-
 import Header from './header'
 import Footer from './footer'
 import Sidenav from './sidenav'

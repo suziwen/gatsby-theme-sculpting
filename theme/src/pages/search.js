@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import debounce from "lodash.debounce"
 import FlexSearch from 'flexsearch'
+
 import SearchForm from "../components/search/search-form"
 import SearchResults from "../components/search/search-results"
 import ContentContainer from '../components/content-container'
@@ -47,14 +48,9 @@ export default Search
 
 export const pageQuery = graphql`
   query {
-    site {
-      siteMetadata {
-        title
-      }
+    localSearchPages {
+      index
+      store
     }
-      localSearchPages {
-        index
-        store
-      }
   }
 `

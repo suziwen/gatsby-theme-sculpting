@@ -1,9 +1,10 @@
 /** @jsx jsx */
-import { jsx, BaseStyles } from "theme-ui"
+import { jsx, Heading, BaseStyles } from "theme-ui"
 import React from "react"
 import Helmet from "react-helmet"
 import { graphql } from "gatsby"
 import {MdArrowForward, MdArrowBack} from "react-icons/md"
+
 import TagsSection from "../components/tags/tags-section"
 import Toc from "../components/toc"
 import ProgressIndicator from "../components/progress-indicator"
@@ -53,20 +54,16 @@ class BlogPostTemplate extends React.Component {
               content={post.createDate}
             />
           </Helmet>
-          <section
-          >
-            <div>
-              <Toc location={location} />
-              <ProgressIndicator />
-              <BioLine>
-                {post.updateDate}
-              </BioLine>
-            </div>
+          <section>
+            <Toc location={location} />
+            <ProgressIndicator />
+            <BioLine>
+              {post.updateDate}
+            </BioLine>
           </section>
-          <h1
-          >
+          <Heading as="h1">
             {post.title}
-          </h1>
+          </Heading>
           <section className="post-body">
             <BaseStyles>
               <div dangerouslySetInnerHTML={{ __html: postHtmlAndCss }} />
@@ -122,7 +119,6 @@ export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     site {
       siteMetadata {
-        title
         siteUrl
       }
     }
@@ -137,14 +133,6 @@ export const pageQuery = graphql`
       createDate(formatString: "MMMM DD, YYYY")
       updateDate(formatString: "MMMM DD, YYYY")
       tags
-      cover {
-        childImageSharp {
-          fluid(maxWidth: 1000) {
-            ...GatsbyImageSharpFluid_tracedSVG
-            originalImg
-          }
-        }
-      }
     }
   }
 `;

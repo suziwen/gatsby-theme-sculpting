@@ -3,6 +3,7 @@ import { jsx, Button, Flex} from 'theme-ui'
 import React from "react"
 import { graphql, StaticQuery } from "gatsby"
 import lodash from "lodash"
+
 import mergePath from '../../utils/merge-path'
 import Link from '../ui-link'
 

@@ -20,7 +20,7 @@ const Tags = ({ pageContext, data, location }) => {
     <ContentContainer>
       <Heading>{tagHeader}</Heading>
       <TagsAll basePath={basePath} tag={tag}/>
-      <ul>
+      <ol>
         {edges.map(({ node }) => {
           const title = node.title
           const slug = node.slug
@@ -30,7 +30,7 @@ const Tags = ({ pageContext, data, location }) => {
             </li>
           )
         })}
-      </ul>
+      </ol>
     </ContentContainer>
   )
 }
@@ -47,7 +47,6 @@ export const pageQuery = graphql`
       edges {
         node {
           title
-          docType
           slug
         }
       }

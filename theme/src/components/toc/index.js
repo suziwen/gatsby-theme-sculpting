@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, BaseStyles } from "theme-ui"
+import { jsx } from "theme-ui"
 import React, {useEffect} from "react";
 import tocbot from 'tocbot';
 

@@ -3,8 +3,8 @@ import { jsx } from "theme-ui"
 import React from "react"
 import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
 import 'gitalk/dist/gitalk.css'
-import Gitalk from 'gitalk'
 import GitalkComponent from "gitalk/dist/gitalk-component"
+
 import mergePath from '../../utils/merge-path'
 import MD5 from '../../utils/md5'
 

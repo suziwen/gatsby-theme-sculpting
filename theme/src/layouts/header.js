@@ -1,10 +1,9 @@
 /** @jsx jsx */
-import { jsx, Container, Flex, useColorMode, useThemeUI } from 'theme-ui'
+import { jsx, Flex, useColorMode, useThemeUI } from 'theme-ui'
 import React from "react"
 import { MDXProvider } from '@mdx-js/react'
 
 import Headroom from "react-headroom"
-import logoData from "../assets/logo-icon.png"
 import MenuButton from './menu-button'
 import NavLink from './nav-link'
 import Content from '../header.mdx'

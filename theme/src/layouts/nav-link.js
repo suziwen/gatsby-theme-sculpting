@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, useThemeUI } from 'theme-ui'
+import { jsx } from 'theme-ui'
 import isAbsoluteURL from 'is-absolute-url'
 import Link from '../components/ui-link'
 
@@ -22,7 +22,6 @@ export default ({ href, children, ...props }) => {
   if (isExternal) {
     return <a {...props} href={href} sx={styles} target="_blank">{children}</a>
   }
-  const { theme } = useThemeUI()
 
   const to = props.to || href
   return (

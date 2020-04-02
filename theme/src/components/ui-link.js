@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, BaseStyles, Link } from "theme-ui"
+import { jsx, Link } from "theme-ui"
 import { Link as GLink} from "gatsby"
 
 

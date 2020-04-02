@@ -14,11 +14,11 @@ const SearchResults = ({ query, results }) => (
       </h2>
     )}
     {!!results.length && (
-      <ol className="search-results-list">
+      <ol>
         {results.map(({ title, url, date, description }) => (
           <li key={title}>
-            <h3 className="search-results-list__heading">
-              <a href={url} className="search-results-list__link">
+            <h3>
+              <a href={url}>
                 <Highlighter
                   searchWords={[query]}
                   autoEscape={true}
