@@ -25,7 +25,7 @@ const PostTocItems = ({items, depth=0, maxDepth=3, basePath='/'})=> {
             >
             {tocItem.title}
             </Link>
-            {tocItem.items && (<PostTocItems items={tocItem.items} depth={depth + 1} maxDepth= {maxDepth}/>)}
+            {tocItem.items && (<PostTocItems items={tocItem.items} depth={depth + 1} maxDepth= {maxDepth} basePath={basePath}/>)}
           </li>)
         })}
       </ul>
