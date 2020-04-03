@@ -141,6 +141,7 @@ module.exports = options => {
               }
             `,
             output: mergePath(basePath, `/rss.xml`),
+            title: `Your Site's RSS Feed`,
             setup: ({
               query: {
                 site: { siteMetadata },

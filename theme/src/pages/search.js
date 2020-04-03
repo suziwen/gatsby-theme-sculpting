@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { graphql } from 'gatsby'
 import debounce from "lodash.debounce"
 import FlexSearch from 'flexsearch'
 
