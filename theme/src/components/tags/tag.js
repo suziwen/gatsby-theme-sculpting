@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Button, Flex} from 'theme-ui'
+import { jsx } from 'theme-ui'
 import React from "react"
 import lodash from "lodash"
 import { graphql, StaticQuery } from "gatsby"

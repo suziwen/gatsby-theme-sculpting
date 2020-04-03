@@ -15,13 +15,11 @@ import mergePath from '../utils/merge-path'
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const props = this.props
     const post = this.props.data.storyWriterMarkdown;
     const siteUrl = this.props.data.site.siteMetadata.siteUrl
     const prev = this.props.pageContext.prev
     const next = this.props.pageContext.next
     const basePath = this.props.pageContext.basePath
-    const tagsPath = this.props.pageContext.tagsPath
     const location = this.props.location
     const BioLine = ({ children }) => (
       <p

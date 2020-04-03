@@ -18,7 +18,7 @@ class ArchiveTemplate extends React.Component {
     const { group } = data.allStoryWriterMarkdown
     const dayInfo = {}
     group.map(({totalCount, fieldValue})=> {
-      dayInfo[fieldValue] = totalCount
+      return dayInfo[fieldValue] = totalCount
     })
     this.datePicked = this.datePicked.bind(this)
     this.rangePicked = this.rangePicked.bind(this)
@@ -58,11 +58,10 @@ class ArchiveTemplate extends React.Component {
 
   render() {
     const {pageContext, data} = this.props
-    const {selectedRange, selectedDay, showAll, dayInfo} = this.state
+    const {selectedRange, showAll, dayInfo} = this.state
     const { year, yearinfo, basePath } = pageContext
     const { group } = data.allStoryWriterMarkdown
     const years = Object.keys(yearinfo)
-    const today = moment()
     const startDateStr = selectedRange[0].format('YYYYMMDD')
     const endDateStr = selectedRange[1].format('YYYYMMDD')
 
@@ -99,7 +98,7 @@ class ArchiveTemplate extends React.Component {
             }}}
           />
         </CalendarDiv>
-        {!yearinfo[year] || !yearinfo[year].count && (
+        {(!yearinfo[year] || !yearinfo[year].count) && (
           <Message sx={{mt: 3}}>
             今年还没有创建任何文章
           </Message>
@@ -117,6 +116,7 @@ class ArchiveTemplate extends React.Component {
                   </li>
                 )
               }
+              return null
             })
           })}
         </ol>)}

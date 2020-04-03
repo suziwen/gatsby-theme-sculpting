@@ -1,15 +1,5 @@
 import { base } from '@theme-ui/presets'
 
-const heading = {
-  fontFamily: 'heading',
-  fontWeight: 'heading',
-  lineHeight: 'heading',
-  a: {
-    color: 'inherit',
-    textDecoration: 'none'
-  }
-}
-
 export default {
   ...base,
   initialColorMode: 'light',

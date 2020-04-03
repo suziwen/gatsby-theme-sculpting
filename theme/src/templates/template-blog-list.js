@@ -49,8 +49,6 @@ const PostToc = ({tocStr, basePath})=>{
 class BlogPostsIndex extends React.Component {
   render() {
     const posts = get(this, "props.data.allStoryWriterMarkdown.edges");
-    const pagesTotal = get(this, "props.pageContext.pagesTotal");
-    const currentPage = get(this, "props.pageContext.currentPage");
     const basePath = get(this, "props.pageContext.basePath");
 
     return (

@@ -1,11 +1,7 @@
 import React from "react"
-import lodash from "lodash"
 
-import Link from '../ui-link'
 import Tag from './tag'
-import mergePath from '../../utils/merge-path'
 
-const _ = require(`lodash`)
 
 const TagsSection = ({ tags }) => {
   if (!tags) return null
