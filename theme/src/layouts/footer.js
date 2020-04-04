@@ -17,7 +17,7 @@ export default () => {
 
   return (
           <Flex sx={styles}>
-            <div>小书匠</div>
+            <div></div>
             <div sx={{
               fontFamily: 'english',
               textAlign: 'right'
