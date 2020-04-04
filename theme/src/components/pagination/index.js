@@ -18,11 +18,13 @@ class Pagination extends React.Component {
     navigate(mergePath(basePath, pageStr))
   }
   render() {
-    const { numPages, currentPage, basePath } = this.props.context
+    const { numPages, currentPage, basePath, hasCustomHomePage } = this.props.context
     const isFirst = currentPage === 1
     const isLast = currentPage === numPages
-    const prevPageStr =
-      currentPage - 1 === 1 ? `` : `/page/${(currentPage - 1).toString()}`
+    let prevPageStr = `/page/${(currentPage - 1).toString()}`
+    if (!hasCustomHomePage && (currentPage - 1 === 1)) {
+      prevPageStr = ``
+    }
     const nextPageStr = `/page/${currentPage + 1}`
     const prevPageLink = isFirst ? null : mergePath(basePath, prevPageStr)
     const nextPageLink = isLast ? null : mergePath(basePath, nextPageStr)

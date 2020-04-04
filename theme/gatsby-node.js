@@ -1,4 +1,5 @@
 const _ = require(`lodash`)
+const fs = require(`fs`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
 const moment = require(`moment`)
@@ -13,6 +14,32 @@ const getRandomInt = function (min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+// Ensure user has create src/pages/index.js
+let hasCustomHomePage = false
+let totalPost = 0
+
+exports.onPreBootstrap = ({ store }, themeOptions) => {
+  const { program } = store.getState()
+  if (fs.existsSync(path.join(program.directory, `src/pages/index.js`))) {
+    hasCustomHomePage = true
+  }
+}
+
+
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage, deletePage } = actions
+  if (page.path === '/index-default/') {
+    deletePage(page)
+    if (totalPost === 0) {
+      createPage({
+        ...page,
+        path: '/'
+      })
+    }
+  }
 }
 
 exports.createPages = ({ graphql, actions }, pluginOptions) => {
@@ -71,6 +98,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
           }
           return undefined
         })
+        totalPost = blogPosts.length
 
         // Tag pages:
         let taginfo = {};
@@ -166,9 +194,15 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
          // pagination blogPost
         const chunkedPosts = _.chunk(blogPosts, pageSize);
         chunkedPosts.forEach((chunk, index) => {
-          let path = `/`
-          if (index > 0) {
-            path = `/page/${index+1}/`
+          let path = `/page/${index+1}/`
+          // 如果用户自定义了 homepage, 这里就不设置成主页
+          if (!hasCustomHomePage && index === 0) {
+            path = `/`
+            createRedirect({
+              toPath: `/`,
+              fromPath: `/page/1`,
+              redirectInBrowser: true,
+            })
           }
           createPage({
               path: mergePath(basePath, path),
@@ -180,6 +214,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
                     docType: docType,
                     numPages: Math.ceil(blogPosts.length / pageSize),
                     currentPage: index + 1,
+                    hasCustomHomePage: hasCustomHomePage
                   }
               ,
           })
