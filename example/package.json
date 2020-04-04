@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@suziwen/gatsby-theme-sculpting": "./theme",
+    "@suziwen/gatsby-theme-sculpting": "file:../theme",
     "gatsby": "^2.19.45",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"

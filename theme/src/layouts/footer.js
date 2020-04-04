@@ -21,7 +21,7 @@ export default () => {
           {({siteMetadata})=>{
             return (
               <Flex sx={styles}>
-                <div></div>
+                <div>{siteMetadata.idoms}</div>
                 <div sx={{
                   fontFamily: 'english',
                   textAlign: 'right'
@@ -33,7 +33,7 @@ export default () => {
                     Build with 
                     &nbsp;<a href="https://www.gatsbyjs.com/" sx={{variant: "styles.a"}} target="_blank" rel="noopener noreferrer">Gatsbyjs</a>&nbsp; 
                     and 
-                    &nbsp;<a href="https://www.github.com/suziwen/gatsby-theme-stone-sculpture" sx={{variant: "styles.a"}} target="_blank" rel="noopener noreferrer">Stone Sculpture</a> 
+                    &nbsp;<a href="https://www.github.com/suziwen/gatsby-theme-sculpting" sx={{variant: "styles.a"}} target="_blank" rel="noopener noreferrer">Sculpting</a> 
                     &nbsp;theme
                   </div>
                 </div>

@@ -33,6 +33,7 @@ module.exports = options => {
     title: "小书匠",
     siteUrl: "http://www.xiaoshujiang.com",
     author: "suziwen",
+    idoms: "宁在一思进，莫在一思停",
     description: `一款让你爱不释手的写作软件`,
   }
   const pluginOptions = {
