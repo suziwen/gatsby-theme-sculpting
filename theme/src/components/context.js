@@ -41,7 +41,7 @@ class ContextProviderComponent extends React.Component {
                 siteUrl
                 title
                 author
-                idoms
+                idiom
                 description
               }
             }

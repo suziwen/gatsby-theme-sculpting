@@ -2,6 +2,7 @@
 import { jsx, Flex} from 'theme-ui'
 import React from "react"
 import ContextConsumer from "../components/context"
+import SiteIdiom from "../components/site-idiom"
 
 
 const styles = {
@@ -21,7 +22,7 @@ export default () => {
           {({siteMetadata})=>{
             return (
               <Flex sx={styles}>
-                <div>{siteMetadata.idoms}</div>
+                <div><SiteIdiom /></div>
                 <div sx={{
                   fontFamily: 'english',
                   textAlign: 'right'
