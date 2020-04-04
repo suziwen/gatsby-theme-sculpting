@@ -24,13 +24,9 @@ const Tags = ({ pageContext, data, location }) => {
     )
   }
   const { edges, totalCount } = data.allStoryWriterMarkdown
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? `` : `s`
-  } tagged with "${tag}"`
 
   return (
     <ContentContainer>
-      <Heading>{tagHeader}</Heading>
       <TagsAll tag={tag}/>
       <ol>
         {edges.map(({ node }) => {
