@@ -7,7 +7,7 @@ import logoIcon from "../assets/logo-icon.png"
 const SiteMetadata = ({ pathname }) => (
   <StaticQuery
     query={graphql`
-      query SiteMetadata {
+      query {
         site {
           siteMetadata {
             siteUrl

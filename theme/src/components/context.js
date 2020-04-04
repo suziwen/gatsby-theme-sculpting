@@ -1,4 +1,5 @@
 import React from "react"
+import { graphql, StaticQuery } from "gatsby"
 
 const defaultContextValue = {
   data: {
@@ -9,12 +10,13 @@ const defaultContextValue = {
 const { Provider, Consumer } = React.createContext(defaultContextValue)
 
 class ContextProviderComponent extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.setData = this.setData.bind(this)
     this.state = {
       ...defaultContextValue,
+      ...props,
       set: this.setData,
     }
   }
@@ -29,7 +31,33 @@ class ContextProviderComponent extends React.Component {
   }
 
   render() {
-    return <Provider value={this.state}>{this.props.children}</Provider>
+    const self = this
+    return (
+      <StaticQuery
+        query={graphql`
+          query {
+            site {
+              siteMetadata {
+                siteUrl
+                title
+                author
+                description
+              }
+            }
+          }
+        `}
+        render={({
+          site: {
+            siteMetadata,
+          },
+        }) => (
+          <Provider value={{
+            siteMetadata,
+            ...self.state,
+          }}>{self.props.children}</Provider>
+        )}
+      />
+    )
   }
 }
 

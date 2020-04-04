@@ -29,14 +29,16 @@ module.exports = options => {
   }
   tagsPath = mergePath('', '/' + tagsPath + '/')
   archivesPath = mergePath('', '/' + archivesPath + '/')
-  siteMetadata = {
+  const siteMetadata = {
     title: "小书匠",
     siteUrl: "http://www.xiaoshujiang.com",
     author: "suziwen",
     description: `一款让你爱不释手的写作软件`,
-    basePath: basePath,
-    tagsPath: tagsPath,
-    archivesPath: archivesPath
+  }
+  const pluginOptions = {
+    tagsPath,
+    archivesPath,
+    basePath,
   }
 
   const plugins = [
@@ -44,7 +46,8 @@ module.exports = options => {
       resolve: 'gatsby-plugin-global-context',
       options: {
         context: {
-          ...siteMetadata
+          pluginOptions,
+          basePath,
         }
       }
     },

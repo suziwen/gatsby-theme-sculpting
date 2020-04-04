@@ -56,6 +56,7 @@ export default ({pageContext, location, children}) => {
   const { theme: { colors = {} } } = useThemeUI()
   const [menuOpen, setMenuOpen] = useState(false)
   const nav = useRef(null)
+  const pluginOptions = pageContext.pluginOptions
   const bodyStyles = {
     html: {
       overflowY: `scroll`
@@ -74,7 +75,7 @@ export default ({pageContext, location, children}) => {
     }}>
       <Global styles={bodyStyles} />
       <SiteMetadata pathname={location.pathname} />
-      <ContextProviderComponent>
+      <ContextProviderComponent pluginOptions={pluginOptions}>
         <ContextConsumer>
           {({data, set})=>{
             return (

@@ -8,6 +8,7 @@ import MenuButton from './menu-button'
 import NavLink from './nav-link'
 import Content from '../header.mdx'
 import Button from './button'
+import SiteTitle from '../components/site-title'
 
 const components = {
   a: NavLink
@@ -55,12 +56,7 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
                 if (navLink) navLink.focus()
               }}
             />
-            <div sx={{
-              ml: 3,
-              fontFamily: 'webfontxiaoshujiang, sans-serif',
-              fontWeight: 'bold',
-              fontSize: '1.5em'
-            }}>小书匠</div>
+            <SiteTitle />
             <div sx={{
               display: ['none', 'block'],
               ml: 'auto'
