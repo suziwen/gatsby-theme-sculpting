@@ -74,42 +74,34 @@ export default ({pageContext, location, children}) => {
       flexDirection: 'column'
     }}>
       <Global styles={bodyStyles} />
-      <SiteMetadata pathname={location.pathname} />
       <ContextProviderComponent pluginOptions={pluginOptions}>
-        <ContextConsumer>
-          {({data, set})=>{
-            return (
-              <>
-                <Header nav={nav} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-                <div
-                  ref={nav}
-                  sx={{
-                    display: ['flex'],
-                    flex: 1,
-                  }}
-                >
-                  <Sidenav
-                    open={menuOpen}
-                    onFocus={() => setMenuOpen(true)}
-                    onBlur={() => setMenuOpen(false)}
-                    onClick={() => setMenuOpen(false)}
-                  />
-                  <div className="toc" sx={tocStyle(menuOpen)}></div>
-                  <div
-                    sx={{
-                      flex: 1,
-                      zIndex: 0,
-                      overflow: 'hidden',
-                    }}
-                  >
-                  {children}
-                  </div>
-                </div>
-                <Footer />
-              </>
-            )
+        <SiteMetadata pathname={location.pathname} />
+        <Header nav={nav} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        <div
+          ref={nav}
+          sx={{
+            display: ['flex'],
+            flex: 1,
           }}
-        </ContextConsumer>
+        >
+          <Sidenav
+            open={menuOpen}
+            onFocus={() => setMenuOpen(true)}
+            onBlur={() => setMenuOpen(false)}
+            onClick={() => setMenuOpen(false)}
+          />
+          <div className="toc" sx={tocStyle(menuOpen)}></div>
+          <div
+            sx={{
+              flex: 1,
+              zIndex: 0,
+              overflow: 'hidden',
+            }}
+          >
+          {children}
+          </div>
+        </div>
+        <Footer />
       </ContextProviderComponent>
     </div>
   )

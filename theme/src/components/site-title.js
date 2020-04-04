@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import React from "react"
-import { graphql, StaticQuery } from "gatsby"
 import ContextConsumer from "../components/context"
 
 const SiteMetadata = () => {
