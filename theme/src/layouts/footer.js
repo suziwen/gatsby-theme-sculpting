@@ -13,6 +13,7 @@ const styles = {
   width: '100%',
   justifyContent: 'space-between',
   padding: 3,
+  flexDirection: ['column', 'row'],
 }
 
 export default () => {
@@ -22,10 +23,13 @@ export default () => {
           {({siteMetadata})=>{
             return (
               <Flex sx={styles}>
-                <div><SiteIdiom /></div>
+                <div sx={{
+                  fontSize: [3,4],
+                }}><SiteIdiom /></div>
                 <div sx={{
                   fontFamily: 'english',
-                  textAlign: 'right'
+                  fontSize: [1, 2],
+                  textAlign: ['center', 'right']
                 }}>
                   <div>
                     Copyright © 2020 {siteMetadata.author}

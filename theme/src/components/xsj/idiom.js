@@ -16,7 +16,6 @@ const XSJTitle = ()=> {
             fontStyle: `normal`,
           },
           fontFamily: 'webfontxiaoshujiangidiom, sans-serif',
-          fontSize: 3,
         }
         const fontStyle = {
         }
