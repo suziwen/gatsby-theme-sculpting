@@ -11,17 +11,6 @@ const styles = {
   width: '100%',
   justifyContent: 'space-between',
   padding: 3,
-  h1: {
-    m: 0
-  },
-  ul: {
-    ml: 'auto',
-    display: 'flex',
-    listStyleType: 'none',
-  },
-  li: {
-    ml: 3
-  }
 }
 
 export default () => {
@@ -30,13 +19,18 @@ export default () => {
           <Flex sx={styles}>
             <div>小书匠</div>
             <div sx={{
-              fontFamily: 'english'
+              fontFamily: 'english',
+              textAlign: 'right'
             }}>
               <div>
-                suziwen © 2020
+                Copyright © 2020 suziwen
               </div>
               <div>
-                theme by xiaoshujiang.com
+                Build with 
+                &nbsp;<a href="https://www.gatsbyjs.com/" sx={{variant: "styles.a"}} target="_blank" rel="noopener noreferrer">Gatsbyjs</a>&nbsp; 
+                and 
+                &nbsp;<a href="https://www.github.com/suziwen/gatsby-theme-stone-sculpture" sx={{variant: "styles.a"}} target="_blank" rel="noopener noreferrer">Stone Sculpture</a> 
+                &nbsp;theme
               </div>
             </div>
           </Flex>
