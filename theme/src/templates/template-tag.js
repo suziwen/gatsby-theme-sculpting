@@ -17,6 +17,7 @@ const Tags = ({ pageContext, data, location }) => {
         display: 'flex',
         alignItems: 'center',
         alignContent: 'center',
+        justifyContent: 'center',
       }}>
         <TagsAll />
       </ContentContainer>

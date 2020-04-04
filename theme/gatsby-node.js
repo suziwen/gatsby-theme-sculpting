@@ -99,6 +99,13 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
           return undefined
         })
         totalPost = blogPosts.length
+        if (totalPost === 0) {
+          createRedirect({
+            toPath: `/`,
+            fromPath: `/page/1`,
+            redirectInBrowser: true,
+          })
+        }
 
         // Tag pages:
         let taginfo = {};

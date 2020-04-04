@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Button, Flex} from 'theme-ui'
+import { jsx, Button, Flex, Message} from 'theme-ui'
 import React from "react"
 import { graphql, StaticQuery } from "gatsby"
 
@@ -21,19 +21,27 @@ const TagsAll = ({ tag='' }) => {
       `}
       render={({ allStoryWriterMarkdown: {group} }) => {
         const  tagStatics = group
-        return (
-          <Flex sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
-            {tagStatics.map(({fieldValue, totalCount}) => {
-              return (
-                <Tag key={fieldValue} tag={fieldValue} sx={{margin: 1}}>
-                  <Button variant={tag === fieldValue? 'primary': 'secondary'}>
-                    {fieldValue}({totalCount})
-                  </Button>
-                </Tag>
-              )
-            })}
-          </Flex>
-        )
+        if (tagStatics.length > 0) {
+          return (
+            <Flex sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
+              {tagStatics.map(({fieldValue, totalCount}) => {
+                return (
+                  <Tag key={fieldValue} tag={fieldValue} sx={{margin: 1}}>
+                    <Button variant={tag === fieldValue? 'primary': 'secondary'}>
+                      {fieldValue}({totalCount})
+                    </Button>
+                  </Tag>
+                )
+              })}
+            </Flex>
+          )
+        } else {
+          return (
+            <Message>
+              您还没有创建任何标签
+            </Message>
+          )
+        }
       }}
     />
   )
