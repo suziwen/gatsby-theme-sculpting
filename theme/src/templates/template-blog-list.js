@@ -120,13 +120,6 @@ export const pageQuery = graphql`
     ) {
       edges {
         node {
-          listCover: cover{
-            childImageSharp{
-              fluid(maxWidth: 180) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
           slug
           title
           toc
@@ -135,13 +128,6 @@ export const pageQuery = graphql`
           tags
           createDate(formatString: "MMM DD,YYYY")
           updateDate(formatString: "YYYY-MM-DD")
-          cover {
-            childImageSharp {
-              fluid(maxWidth: 1024) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
         }
       }
     }
