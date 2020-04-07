@@ -36,6 +36,7 @@ module.exports = options => {
     tagsPath,
     archivesPath,
     basePath,
+    commentType: !!disqus? 'disqus':!!gitalk?'gitalk':false
   }
 
   const plugins = [
@@ -185,6 +186,14 @@ module.exports = options => {
       resolve: `gatsby-plugin-disqus`,
       options: {
         shortname: disqus.shortname
+      }
+    })
+  }
+  if  (gitalk ) {
+    plugins.push({
+      resolve: `gatsby-plugin-gitalk`,
+      options: {
+        config: gitalk
       }
     })
   }
