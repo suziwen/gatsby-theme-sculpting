@@ -158,7 +158,7 @@ exports.createPages = ({ graphql, actions }, pluginOptions) => {
         });
         // Archive pages:
         const nowYear = new Date().getFullYear() + ''
-        yearinfo[nowYear] = 0
+        yearinfo[nowYear] = yearinfo[nowYear] || 0
         Object.keys(yearinfo).forEach(year => {
           let archiveSlug = `${archivesPath}${year}/`
           if (year === nowYear) {
