@@ -22,7 +22,7 @@ const tokenizerFn = function(str){
 
 
 module.exports = options => {
-  let { mdx = true, contentPath = 'posts' , docType='posts', basePath = '/', tagsPath = 'tags', archivesPath ='archives'} = options
+  let { mdx = true, contentPath = 'posts' , docType='posts', basePath = '/', tagsPath = 'tags', archivesPath ='archives', disqus, gitalk} = options
   tagsPath = mergePath('', '/' + tagsPath + '/')
   archivesPath = mergePath('', '/' + archivesPath + '/')
   const siteMetadata = {
@@ -180,11 +180,11 @@ module.exports = options => {
     },
   )
 
-  if ( process.env.COMMENT_WIDGET === "disqus" && process.env.DISQUS_SHORT_NAME) {
+  if (disqus && disqus.shortname) {
     plugins.push({
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: process.env.DISQUS_SHORT_NAME
+        shortname: disqus.shortname
       }
     })
   }
