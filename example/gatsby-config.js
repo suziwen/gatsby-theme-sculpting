@@ -8,6 +8,8 @@ module.exports = {
   siteMetadata,
   plugins: [{ 
     resolve: `@suziwen/gatsby-theme-sculpting`,
-    options: {} 
+    options: {
+      contentPath: `posts`,
+    } 
   }],
 }

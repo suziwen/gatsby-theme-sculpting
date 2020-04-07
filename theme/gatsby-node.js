@@ -3,6 +3,7 @@ const fs = require(`fs`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
 const moment = require(`moment`)
+const mkdirp = require(`mkdirp`)
 const mergePath = (basePath = '/', path = '')=>{
   let result = "/" + basePath + "/" + path
   result = result.replace(/\/+/g, '/')
@@ -23,8 +24,13 @@ let totalPost = 0
 
 exports.onPreBootstrap = ({ store }, themeOptions) => {
   const { program } = store.getState()
+  const contentPath = themeOptions.contentPath || 'posts'
+  const contentDir = path.join(program.directory, contentPath)
   if (fs.existsSync(path.join(program.directory, `src/pages/index.js`))) {
     hasCustomHomePage = true
+  }
+  if (!fs.existsSync(contentDir)){
+    mkdirp.sync(contentDir)
   }
 }
 

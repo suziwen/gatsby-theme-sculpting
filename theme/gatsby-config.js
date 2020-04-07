@@ -23,10 +23,6 @@ const tokenizerFn = function(str){
 
 module.exports = options => {
   let { mdx = true, contentPath = 'posts' , docType='posts', basePath = '/', tagsPath = 'tags', archivesPath ='archives'} = options
-  if(!fs.existsSync(contentPath)) {
-    // 如果用户未创建 contentPath 目录,就使用主题里默认的 posts
-    contentPath = `${__dirname}/posts`
-  }
   tagsPath = mergePath('', '/' + tagsPath + '/')
   archivesPath = mergePath('', '/' + archivesPath + '/')
   const siteMetadata = {
