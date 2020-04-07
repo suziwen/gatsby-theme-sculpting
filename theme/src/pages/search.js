@@ -35,6 +35,15 @@ const Search = ({ data, location }) => {
       setResults(posts)
     }, 500)
   }
+  useEffect(() => {
+    return ()=>{
+      if (flexStore) {
+        debouncedSearch.cancel()
+        importedIndex = null
+        flexStore = null
+      }
+    }
+  }, [location.pathname])
 
   useEffect(() => {
     if (searchQuery) {
