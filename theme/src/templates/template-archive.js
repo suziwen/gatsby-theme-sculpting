@@ -4,6 +4,7 @@ import React from "react"
 import moment from 'moment'
 import { graphql } from "gatsby"
 import {Calendar} from 'react-yearly-calendar'
+import {GiThink} from "react-icons/gi"
 
 import CalendarDiv from '../components/calendar-style'
 import ContentContainer from '../components/content-container'
@@ -100,7 +101,11 @@ class ArchiveTemplate extends React.Component {
         </CalendarDiv>
         {(!yearinfo[year] || !yearinfo[year].count) && (
           <Message sx={{mt: 3}}>
-            今年还没有创建任何文章
+            <GiThink sx={{
+              fontSize: '3em',
+              verticalAlign: 'middle',
+              margin: 3,
+            }} />今年还没有创建任何文章
           </Message>
         )}
         {!!yearinfo[year] && !!yearinfo[year].count && (<ol>
