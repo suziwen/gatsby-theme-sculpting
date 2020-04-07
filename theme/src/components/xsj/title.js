@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import React from "react"
+import {GiFeather} from "react-icons/gi"
 import ContextConsumer from "../context"
 import FontFile from "./title.woff"
 
@@ -29,7 +30,7 @@ const XSJTitle = ()=> {
         return (
           <div sx={style}>
             <a href={siteUrl}>
-              小书匠
+              小书匠<GiFeather sx={{fontSize: '1.5em', verticalAlign: 'text-bottom'}} /><span sx={{fontFamily: "english", fontWeight: 'normal'}}>Sculpting</span>
             </a>
           </div>
         )

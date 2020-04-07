@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import React from "react"
+import {GiConqueror} from "react-icons/gi"
 import ContextConsumer from "../context"
 import FontFile from "./idiom.woff"
 
@@ -21,7 +22,7 @@ const XSJTitle = ()=> {
         }
         return (
           <span sx={style}>
-            {idiom}
+            {idiom} <GiConqueror  sx={{fontSize: '1.5em', verticalAlign: 'text-bottom'}}/>
           </span>
         )
       }}
