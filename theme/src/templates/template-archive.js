@@ -105,7 +105,8 @@ class ArchiveTemplate extends React.Component {
               fontSize: '3em',
               verticalAlign: 'middle',
               margin: 3,
-            }} />今年还没有创建任何文章
+            }} />
+            <span sx={{mr:3}}>今年还没有创建任何文章</span>
           </Message>
         )}
         {!!yearinfo[year] && !!yearinfo[year].count && (<ol>

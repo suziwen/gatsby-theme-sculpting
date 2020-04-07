@@ -2,6 +2,7 @@
 import { jsx, Button, Flex, Message} from 'theme-ui'
 import React from "react"
 import { graphql, StaticQuery } from "gatsby"
+import {GiThink} from "react-icons/gi"
 
 import Tag from './tag'
 
@@ -38,7 +39,12 @@ const TagsAll = ({ tag='' }) => {
         } else {
           return (
             <Message>
-              您还没有创建任何标签
+            <GiThink sx={{
+              fontSize: '3em',
+              verticalAlign: 'middle',
+              margin: 3,
+            }} />
+              <span sx={{mr:3}}>您还没有创建任何标签</span>
             </Message>
           )
         }

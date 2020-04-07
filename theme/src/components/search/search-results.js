@@ -35,9 +35,9 @@ const SearchResults = ({ query, results, searching }) => {
                 verticalAlign: 'middle',
                 margin: 3,
               }} />
-              <div sx={{flex: 1}}>
+              <div sx={{flex: 1, mr: 3}}>
                 <Heading>没有找到跟 "<strong>{query}</strong>" 相关的文章</Heading>
-                <p>为了提高查找命中率,可以将多个不同的词语用空格分开.</p>
+                <p sx={{mb: 0}}>为了提高查找命中率,可以将多个不同的词语用空格分开.</p>
               </div>
             </Message>
           )}
