@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui"
 import React from "react"
 import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
-import 'gitalk/dist/gitalk.css'
+import '@suziwen/gitalk/dist/gitalk.css'
 import Gitalk from "gatsby-plugin-gitalk"
 
 import ContextConsumer from "../context"
