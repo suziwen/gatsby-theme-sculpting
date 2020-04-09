@@ -16,7 +16,7 @@ module.exports = {
       _disqus: {
         shortname: process.env.DISQUS_SHORT_NAME
       },
-      gitalk: {
+      _gitalk: {
         clientID: process.env.GITALK_CLIENT_ID,
         clientSecret: process.env.GITALK_CLIENT_SECRET,
         repo: process.env.GITALK_REPO,
