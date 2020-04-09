@@ -45,7 +45,7 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
   }
 
   return (
-      <Headroom>
+        <Headroom style={{zIndex: 2}}>
           <Flex sx={styles}>
             <MenuButton
               menuOpen={menuOpen}
