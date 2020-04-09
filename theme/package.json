@@ -20,7 +20,7 @@
     "gatsby-plugin"
   ],
   "scripts": {
-    "p": "npm --registry https://registry.npmjs.org  publish --access=public",
+    "p": "npm --registry https://registry.npmjs.org  publish --access=public"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
