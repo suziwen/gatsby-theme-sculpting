@@ -4,8 +4,10 @@
   </a>
 </p>
 <h1 align="center">
-  Starter for creating a Gatsby Theme workspace
+  A Gatsby Theme Sculpting workspace
 </h1>
+
+![screenshot](screenshot.png)
 
 ```shell
 gatsby new my-theme https://github.com/gatsbyjs/gatsby-starter-theme-workspace
