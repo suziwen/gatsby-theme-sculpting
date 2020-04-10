@@ -4,15 +4,8 @@
   "main": "index.js",
   "author": "suziwen <suziwen1@gmail.com> (@suziwen)",
   "license": "MIT",
-  "devDependencies": {
-    "gatsby": "2.15.29",
-    "react": "16.10.2",
-    "react-dom": "16.10.2"
-  },
   "peerDependencies": {
-    "gatsby": "^2.15.24",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "gatsby": "^2.20.2"
   },
   "keywords": [
     "gatsby",
