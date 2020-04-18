@@ -33,6 +33,10 @@ class Comments extends React.Component {
                 id: MD5(post.slug || post.id),
                 title: post.title
               }
+              if (typeof window !== 'undefined') {
+                const location = window.location
+                gitalkConfig['url'] = location.origin + location.pathname + location.search
+              }
             }
           return (
             <>
