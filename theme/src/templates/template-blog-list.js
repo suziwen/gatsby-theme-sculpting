@@ -31,6 +31,7 @@ const PostTocItems = ({items, depth=0, maxDepth=3, basePath='/'})=> {
       </ul>
     )
   }
+  return (<></>)
 }
 
 const PostToc = ({tocStr, basePath})=>{
@@ -44,6 +45,7 @@ const PostToc = ({tocStr, basePath})=>{
       <PostTocItems items={toc} depth={0} maxDepth={3} basePath={basePath}/>
     </div>)
   }
+  return (<></>)
 }
 
 class BlogPostsIndex extends React.Component {
