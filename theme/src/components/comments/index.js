@@ -38,7 +38,7 @@ class Comments extends React.Component {
             <>
               {!!disqusConfig && (<CommentCount config={disqusConfig} placeholder={'...'} />)}
               {!!disqusConfig && (<Disqus config={disqusConfig} />)}
-              {!!gitalkConfig && (<Gitalk
+              {!!gitalkConfig && typeof window !== 'undefined' && (<Gitalk
                 options={gitalkConfig}
               />)}
             </>
