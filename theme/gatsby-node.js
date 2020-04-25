@@ -51,7 +51,7 @@ exports.onCreatePage = async ({ page, actions }) => {
 exports.createPages = ({ graphql, actions }, pluginOptions) => {
   const { createPage, createRedirect } = actions
   const docType =  pluginOptions.docType || 'posts';
-  const pageSize = pluginOptions.pageSize ||  4;
+  const pageSize = pluginOptions.pageSize ||  10;
   const basePath = pluginOptions.basePath || '/';
   let tagsPath = pluginOptions.tagsPath || 'tags';
   let archivesPath = pluginOptions.archivesPath || 'archives';
