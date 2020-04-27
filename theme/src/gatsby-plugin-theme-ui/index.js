@@ -137,6 +137,17 @@ export default {
       borderBottom: '1px solid',
       borderColor: 'muted',
     },
+    blockquote: {
+      p: 3,
+      my: 3,
+      ml: 2,
+      mr: 3,
+      borderLeftWidth: '5px',
+      borderLeftStyle: 'solid',
+      borderLeftColor: 'text',
+      bg: 'muted',
+
+    },
     img: {
       maxWidth: '100%'
     },
