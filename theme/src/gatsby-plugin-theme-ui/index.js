@@ -151,6 +151,9 @@ export default {
     img: {
       maxWidth: '100%'
     },
+    '.xiaoshujiang_pre': {
+      whiteSpace: 'pre-wrap',
+    },
     '.hljs': {
       color: 'text',
       bg: 'muted',
