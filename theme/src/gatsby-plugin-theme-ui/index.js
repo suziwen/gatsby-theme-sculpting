@@ -153,8 +153,12 @@ export default {
     },
     '.xiaoshujiang_pre': {
       whiteSpace: 'pre-wrap',
+      '.ol_linenums': {
+        mt: 0,
+      },
     },
     '.hljs': {
+      p: 2,
       color: 'text',
       bg: 'muted',
       [['.hljs-subst']]: {
