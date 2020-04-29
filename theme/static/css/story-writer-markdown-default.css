@@ -393,3 +393,9 @@ div.mathjax {
 .story_block_image .gif_player.loading .play_button:after{
   content: ' ';
 }
+
+.xsj_paragraph_level_0:before, blockquote>.xsj_paragraph_level_1:before {
+  content: '　';
+  display: inline-block;
+  width: 2em;
+}
