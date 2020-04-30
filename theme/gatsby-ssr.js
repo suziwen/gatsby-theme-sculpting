@@ -13,7 +13,8 @@ exports.onRenderBody = ({ setHeadComponents, setPostBodyComponents }, pluginOpti
     <link key="oswald" rel="stylesheet" type="text/css" href={withPrefix('/') + "fonts/Webfonts/oswald/stylesheet.css?version=" + staticVersion}/>,
     <link key="zh" rel="stylesheet" type="text/css" href={withPrefix('/') + "xsjfonts/fontstyles/zh.css?version=" + staticVersion}/>,
     <link key="awesome" rel="stylesheet" type="text/css" href={withPrefix('/') + "css/font-awesome.min.css?version=" + staticVersion}/>,
-    <link key="svgwithjs" rel="stylesheet" type="text/css" href={withPrefix('/') + "css/svg-with-js.css?version=" + staticVersion}/>
+    <link key="svgwithjs" rel="stylesheet" type="text/css" href={withPrefix('/') + "css/svg-with-js.css?version=" + staticVersion}/>,
+    <link key="svgwithjs" rel="stylesheet" type="text/css" href={withPrefix('/') + "css/gitalk.css?version=" + staticVersion}/>
   ]
   setHeadComponents(output)
   setPostBodyComponents([
