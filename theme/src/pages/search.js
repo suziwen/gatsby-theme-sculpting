@@ -11,11 +11,12 @@ import ContentContainer from '../components/content-container'
 let flexStore = null
 let importedIndex = null
 let debouncedSearch = null
+let searchQuery = ''
 
 const Search = ({ data, location }) => {
   const [results, setResults] = useState([])
   const [searching, setSearching] = useState(false)
-  const searchQuery = new URLSearchParams(location.search).get("keywords") || ""
+  searchQuery = new URLSearchParams(location.search).get("keywords") || ""
   const flexIndex = data.localSearchPages.index
   if (!flexStore) {
     flexStore = JSON.parse(data.localSearchPages.store)
