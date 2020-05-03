@@ -203,19 +203,15 @@ exports.createPages = async ({ graphql, actions, getNode, reporter }, pluginOpti
         next
       },
     })
-    console.log('tttttttttttttttttttt')
-    console.log(pluginOptions)
-    console.log(GitalkPluginHelper)
     if (pluginOptions.gitalk && pluginOptions.gitalkCreateIssueToken) {
       //如果用户使用了像 github action, 并提供了 创建 issue 的 Token, 就直接先创建 issue
-      console.log('create issue')
       const issueOptions = Object.assign({}, pluginOptions.gitalk, {
         id: MD5(post.node.slug || post.node.id),
         title: post.node.title,
         description: post.node.excerpt,
         url: siteUrl + mergePath(basePath, post.node.slug),
       }, {
-        accessToken: pluginOptions.gitalkCreateIssueToken
+        personalToken: pluginOptions.gitalkCreateIssueToken
       })
       await GitalkPluginHelper.createIssue(issueOptions)
       reporter.info(`create issue: ${post.node.title}`)
