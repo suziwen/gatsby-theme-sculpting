@@ -42,7 +42,7 @@
     "gatsby-transformer-yaml": "^2.3.0",
     "is-absolute-url": "^3.0.3",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "2.24.0",
     "nodejieba": "^2.4.1",
     "react-composition": "^0.2.2",
     "react-headroom": "^3.0.0",
