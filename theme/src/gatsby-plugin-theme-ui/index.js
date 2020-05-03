@@ -153,6 +153,8 @@ export default {
     },
     '.xiaoshujiang_pre': {
       whiteSpace: 'pre-wrap',
+      fontFamily: 'monospace',
+      tabSize: '4',
       '.ol_linenums': {
         mt: 0,
       },
