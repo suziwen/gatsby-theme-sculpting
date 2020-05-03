@@ -48,192 +48,189 @@ exports.onCreatePage = async ({ page, actions }) => {
   }
 }
 
-exports.createPages = ({ graphql, actions }, pluginOptions) => {
+exports.createPages = async ({ graphql, actions }, pluginOptions) => {
   const { createPage, createRedirect } = actions
   const docType =  pluginOptions.docType || 'posts';
   const pageSize = pluginOptions.pageSize ||  10;
   const basePath = pluginOptions.basePath || '/';
   let tagsPath = pluginOptions.tagsPath || 'tags';
   let archivesPath = pluginOptions.archivesPath || 'archives';
+  const gitalkConfig = pluginOptions.gitalkConfig;
   tagsPath = mergePath('', '/' + tagsPath + '/')
   archivesPath = mergePath('', '/' + archivesPath + '/')
 
-  return new Promise((resolve, reject) => {
-    const blogPostTemplate = require.resolve(`./src/templates/template-blog-post.js`)
-    const paginatedPostsTemplate = require.resolve(`./src/templates/template-blog-list.js`)
-    const tagTemplate = require.resolve(`./src/templates/template-tag.js`)
-    const archiveTemplate = require.resolve(`./src/templates/template-archive.js`)
-    resolve(
-      graphql(
-        `
-          {
-            allStoryWriterMarkdown(
-              sort: { fields: [updateDate], order: DESC }, limit: 1000
-            ) {
-              edges {
-                node {
-                  title
-                  toc
-                  createYear
-                  docType
-                  slug
-                  tags
-                  updateDate
-                  excerpt
-                }
-              }
+  const blogPostTemplate = require.resolve(`./src/templates/template-blog-post.js`)
+  const paginatedPostsTemplate = require.resolve(`./src/templates/template-blog-list.js`)
+  const tagTemplate = require.resolve(`./src/templates/template-tag.js`)
+  const archiveTemplate = require.resolve(`./src/templates/template-archive.js`)
+
+  const result = await graphql(
+    `
+      {
+        allStoryWriterMarkdown(
+          sort: { fields: [updateDate], order: DESC }, limit: 1000
+        ) {
+          edges {
+            node {
+              title
+              toc
+              createYear
+              docType
+              slug
+              tags
+              updateDate
+              excerpt
             }
           }
-        `
-      ).then(result => {
-        if (result.errors) {
-          console.log(result.errors)
-          reject(result.errors)
         }
+      }
+    `
+  )
+  if (result.errors) {
+    console.log(result.errors)
+    reject(result.errors)
+  }
 
-        // Create blog posts pages.
-        if (!result.data) {
-          reject("no story writer markdown")
-          return
+  // Create blog posts pages.
+  if (!result.data) {
+    reject("no story writer markdown")
+    return
+  }
+  const posts = result.data.allStoryWriterMarkdown.edges
+  const blogPosts = _.filter(result.data.allStoryWriterMarkdown.edges, edge=>{
+    const _docType = _.get(edge, `node.docType`)
+    if (_docType ===  docType) {
+      return edge
+    }
+    return undefined
+  })
+  totalPost = blogPosts.length
+  if (totalPost === 0) {
+    createRedirect({
+      toPath: `/`,
+      fromPath: `/page/1`,
+      redirectInBrowser: true,
+    })
+  }
+
+  // Tag pages:
+  let taginfo = {};
+  let yearinfo = {}
+  // Iterate through each post, putting all found tags into `tags`
+  blogPosts.forEach(edge => {
+    const createYear = edge.node.createYear
+    if (yearinfo[createYear]) {
+      yearinfo[createYear]++
+    } else {
+      yearinfo[createYear] = 1
+    }
+    
+    if (_.get(edge, "node.tags")) {
+      edge.node.tags.forEach((tag)=>{
+        tag = tag.trim()
+        if (taginfo[tag]) {
+          taginfo[tag]++
+        } else {
+          taginfo[tag] = 1
         }
-        const posts = result.data.allStoryWriterMarkdown.edges
-        const blogPosts = _.filter(result.data.allStoryWriterMarkdown.edges, edge=>{
-          const _docType = _.get(edge, `node.docType`)
-          if (_docType ===  docType) {
-            return edge
-          }
-          return undefined
-        })
-        totalPost = blogPosts.length
-        if (totalPost === 0) {
-          createRedirect({
-            toPath: `/`,
-            fromPath: `/page/1`,
-            redirectInBrowser: true,
-          })
-        }
-
-        // Tag pages:
-        let taginfo = {};
-        let yearinfo = {}
-        // Iterate through each post, putting all found tags into `tags`
-        blogPosts.forEach(edge => {
-          const createYear = edge.node.createYear
-          if (yearinfo[createYear]) {
-            yearinfo[createYear]++
-          } else {
-            yearinfo[createYear] = 1
-          }
-          
-          if (_.get(edge, "node.tags")) {
-            edge.node.tags.forEach((tag)=>{
-              tag = tag.trim()
-              if (taginfo[tag]) {
-                taginfo[tag]++
-              } else {
-                taginfo[tag] = 1
-              }
-            })
-          }
-        });
-        // Make tag pages
-        Object.keys(taginfo).forEach(tag => {
-            const tagSlug = `${tagsPath}${_.kebabCase(tag)}/`
-            const count = taginfo[tag]
-            taginfo[tag] = {slug: tagSlug, count: count}
-            createPage({
-                path: mergePath(basePath, tagSlug),
-                component: tagTemplate,
-                context: {
-                    tag,
-                },
-            });
-        });
-        createPage({
-            path: mergePath(basePath, tagsPath),
-            component: tagTemplate,
-            context: {
-              tag: '________none',
-            },
-        });
-        // Archive pages:
-        const nowYear = new Date().getFullYear() + ''
-        yearinfo[nowYear] = yearinfo[nowYear] || 0
-        Object.keys(yearinfo).forEach(year => {
-          let archiveSlug = `${archivesPath}${year}/`
-          if (year === nowYear) {
-            archiveSlug = archivesPath
-          }
-          const count = yearinfo[year]
-          yearinfo[year] = {slug: mergePath(basePath, archiveSlug), count: count}
-          createPage({
-            path: mergePath(basePath, archiveSlug),
-            component: archiveTemplate,
-            context: {
-              year,
-              yearinfo
-            }
-          })
-        })
-
-
-        blogPosts.forEach((post, index) => {
-          const wrapperNode = (node)=>{
-            if (node) {
-              return {
-                title: node.title,
-                docType: node.docType,
-                slug: node.slug
-              }
-            }
-            return null;
-          }
-          let next = index === 0 ? null : blogPosts[index - 1].node
-          next = wrapperNode(next);
-          let prev =
-            index === blogPosts.length - 1 ? null : blogPosts[index + 1].node
-          prev = wrapperNode(prev);
-          createPage({
-            path: mergePath(basePath, post.node.slug),
-            component: blogPostTemplate,
-            context: {
-              slug: post.node.slug,
-              prev,
-              next
-            },
-          })
-        })
-
-         // pagination blogPost
-        const chunkedPosts = _.chunk(blogPosts, pageSize);
-        chunkedPosts.forEach((chunk, index) => {
-          let path = `/page/${index+1}/`
-          // 如果用户自定义了 homepage, 这里就不设置成主页
-          if (!hasCustomHomePage && index === 0) {
-            path = `/`
-            createRedirect({
-              toPath: `/`,
-              fromPath: `/page/1`,
-              redirectInBrowser: true,
-            })
-          }
-          createPage({
-              path: mergePath(basePath, path),
-              component: paginatedPostsTemplate,
-              context:
-                  {
-                    limit: pageSize,
-                    skip: index * pageSize,
-                    docType: docType,
-                    numPages: Math.ceil(blogPosts.length / pageSize),
-                    currentPage: index + 1,
-                    hasCustomHomePage: hasCustomHomePage
-                  }
-              ,
-          })
-        })
       })
-    )
+    }
+  });
+  // Make tag pages
+  Object.keys(taginfo).forEach(tag => {
+      const tagSlug = `${tagsPath}${_.kebabCase(tag)}/`
+      const count = taginfo[tag]
+      taginfo[tag] = {slug: tagSlug, count: count}
+      createPage({
+          path: mergePath(basePath, tagSlug),
+          component: tagTemplate,
+          context: {
+              tag,
+          },
+      });
+  });
+  createPage({
+      path: mergePath(basePath, tagsPath),
+      component: tagTemplate,
+      context: {
+        tag: '________none',
+      },
+  });
+  // Archive pages:
+  const nowYear = new Date().getFullYear() + ''
+  yearinfo[nowYear] = yearinfo[nowYear] || 0
+  Object.keys(yearinfo).forEach(year => {
+    let archiveSlug = `${archivesPath}${year}/`
+    if (year === nowYear) {
+      archiveSlug = archivesPath
+    }
+    const count = yearinfo[year]
+    yearinfo[year] = {slug: mergePath(basePath, archiveSlug), count: count}
+    createPage({
+      path: mergePath(basePath, archiveSlug),
+      component: archiveTemplate,
+      context: {
+        year,
+        yearinfo
+      }
+    })
+  })
+
+
+  blogPosts.forEach((post, index) => {
+    const wrapperNode = (node)=>{
+      if (node) {
+        return {
+          title: node.title,
+          docType: node.docType,
+          slug: node.slug
+        }
+      }
+      return null;
+    }
+    let next = index === 0 ? null : blogPosts[index - 1].node
+    next = wrapperNode(next);
+    let prev =
+      index === blogPosts.length - 1 ? null : blogPosts[index + 1].node
+    prev = wrapperNode(prev);
+    createPage({
+      path: mergePath(basePath, post.node.slug),
+      component: blogPostTemplate,
+      context: {
+        slug: post.node.slug,
+        prev,
+        next
+      },
+    })
+  })
+
+   // pagination blogPost
+  const chunkedPosts = _.chunk(blogPosts, pageSize);
+  chunkedPosts.forEach((chunk, index) => {
+    let path = `/page/${index+1}/`
+    // 如果用户自定义了 homepage, 这里就不设置成主页
+    if (!hasCustomHomePage && index === 0) {
+      path = `/`
+      createRedirect({
+        toPath: `/`,
+        fromPath: `/page/1`,
+        redirectInBrowser: true,
+      })
+    }
+    createPage({
+        path: mergePath(basePath, path),
+        component: paginatedPostsTemplate,
+        context:
+            {
+              limit: pageSize,
+              skip: index * pageSize,
+              docType: docType,
+              numPages: Math.ceil(blogPosts.length / pageSize),
+              currentPage: index + 1,
+              hasCustomHomePage: hasCustomHomePage
+            }
+        ,
+    })
   })
 }
 
