@@ -1,15 +1,14 @@
+//https://github.com/gatsbyjs/gatsby/issues/7810#issuecomment-449741977
+const requirees6 = require("esm")(module/*, options*/)
 const _ = require(`lodash`)
 const fs = require(`fs`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
 const moment = require(`moment`)
+const {GitalkPluginHelper} = require('gatsby-plugin-gitalk')
+const mergePath = requirees6('./src/utils/merge-path').default
+const MD5 = requirees6('./src/utils/md5').default
 const mkdirp = require(`mkdirp`)
-const mergePath = (basePath = '/', path = '')=>{
-  let result = "/" + basePath + "/" + path
-  result = result.replace(/\/+/g, '/')
-  return result
-}
-
 
 const getRandomInt = function (min, max) {
   min = Math.ceil(min);
@@ -48,7 +47,9 @@ exports.onCreatePage = async ({ page, actions }) => {
   }
 }
 
-exports.createPages = async ({ graphql, actions }, pluginOptions) => {
+exports.createPages = async ({ graphql, actions, getNode, reporter }, pluginOptions) => {
+  const site = getNode('Site')
+  const {siteMetadata: {siteUrl}} = site
   const { createPage, createRedirect } = actions
   const docType =  pluginOptions.docType || 'posts';
   const pageSize = pluginOptions.pageSize ||  10;
@@ -87,13 +88,13 @@ exports.createPages = async ({ graphql, actions }, pluginOptions) => {
     `
   )
   if (result.errors) {
-    console.log(result.errors)
-    reject(result.errors)
+    reporter.error(result.errors)
+    return
   }
 
   // Create blog posts pages.
   if (!result.data) {
-    reject("no story writer markdown")
+    reporter.warn("no story writer markdown")
     return
   }
   const posts = result.data.allStoryWriterMarkdown.edges
@@ -177,7 +178,7 @@ exports.createPages = async ({ graphql, actions }, pluginOptions) => {
   })
 
 
-  blogPosts.forEach((post, index) => {
+  for (const [index, post] of blogPosts.entries()) {
     const wrapperNode = (node)=>{
       if (node) {
         return {
@@ -202,7 +203,19 @@ exports.createPages = async ({ graphql, actions }, pluginOptions) => {
         next
       },
     })
-  })
+    if (pluginOptions.gitalk && pluginOptions.gitalkCreateIssueToken) {
+      //如果用户使用了像 github action, 并提供了 创建 issue 的 Token, 就直接先创建 issue
+      const issueOptions = Object.extends({}, pluginOptions.gitalk, {
+        id: MD5(post.node.slug || post.node.id),
+        title: post.node.title,
+        description: post.node.excerpt,
+        url: siteUrl + mergePath(basePath, post.node.slug),
+      }, {
+        accessToken: pluginOptions.gitalkCreateIssueToken
+      })
+      await GitalkPluginHelper.createIssue(issueOptions)
+    }
+  }
 
    // pagination blogPost
   const chunkedPosts = _.chunk(blogPosts, pageSize);
