@@ -1,3 +1,6 @@
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
 //https://github.com/gatsbyjs/gatsby/issues/7810#issuecomment-449741977
 const requirees6 = require("esm")(module/*, options*/)
 const _ = require(`lodash`)
@@ -203,7 +206,8 @@ exports.createPages = async ({ graphql, actions, getNode, reporter }, pluginOpti
         next
       },
     })
-    if (pluginOptions.gitalk && pluginOptions.gitalkCreateIssueToken) {
+    const gitalkCreateIssueToken = process.env.GITALK_CREATE_ISSUE_TOKEN
+    if (pluginOptions.gitalk && gitalkCreateIssueToken) {
       //如果用户使用了像 github action, 并提供了 创建 issue 的 Token, 就直接先创建 issue
       const issueOptions = Object.assign({}, pluginOptions.gitalk, {
         id: MD5(post.node.slug || post.node.id),
@@ -211,7 +215,7 @@ exports.createPages = async ({ graphql, actions, getNode, reporter }, pluginOpti
         description: post.node.excerpt,
         url: siteUrl + mergePath(basePath, post.node.slug),
       }, {
-        personalToken: pluginOptions.gitalkCreateIssueToken
+        personalToken: gitalkCreateIssueToken
       })
       await GitalkPluginHelper.createIssue(issueOptions)
       reporter.info(`create issue: ${post.node.title}`)
