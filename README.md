@@ -14,6 +14,10 @@
 Github 地址: https://github.com/suziwen/gatsby-theme-sculpting
 Gitee  地址: https://gitee.com/booksmith/gatsby-theme-sculpting
 
+# 示例
+
+[Scrat's Acorn](https://suziwen.github.io/acorns/)
+
 # 主要特性
 
  - 基于 [Gatsby](https://www.gatsbyjs.org/)
@@ -37,6 +41,8 @@ Gitee  地址: https://gitee.com/booksmith/gatsby-theme-sculpting
 # 详细使用说明
 
 [详细说明](theme/README.md)
+
+[详细说明](https://suziwen.github.io/acorns/sculpting/sculpting_theme_introduce)
 
 # Gihthub Action 集成
 
