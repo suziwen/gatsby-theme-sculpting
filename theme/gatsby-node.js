@@ -207,7 +207,9 @@ exports.createPages = async ({ graphql, actions, getNode, reporter }, pluginOpti
       },
     })
     const gitalkCreateIssueToken = process.env.GITALK_CREATE_ISSUE_TOKEN
-    if (pluginOptions.gitalk && gitalkCreateIssueToken) {
+    // 仅更新最近的 10 篇文章 issue 是否需要创建评论,
+    // 防止 github api 请求限制超额问题
+    if (pluginOptions.gitalk && gitalkCreateIssueToken && index < 10) {
       //如果用户使用了像 github action, 并提供了 创建 issue 的 Token, 就直接先创建 issue
       const issueOptions = Object.assign({}, pluginOptions.gitalk, {
         id: MD5(post.node.slug || post.node.id),
