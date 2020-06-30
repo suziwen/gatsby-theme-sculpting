@@ -17,6 +17,7 @@ class ArchiveTemplate extends React.Component {
     super(props)
     const data = props.data
     const { group } = data.allStoryWriterMarkdown
+    group.reverse()
     const dayInfo = {}
     group.map(({totalCount, fieldValue})=> {
       return dayInfo[fieldValue] = totalCount
