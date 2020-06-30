@@ -1,18 +1,22 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import React from "react"
-import { AccordionNav } from '@theme-ui/sidenav'
+import { AccordionNav } from './theme-ui-sidenav'
 import NavLink from './nav-link'
-import Sidebar from '../header.mdx'
+import headers from '../header.yaml'
 
 const components = {
-  wrapper: AccordionNav,
   a: NavLink,
 }
 
 export default props => {
+  const headerFragment =  headers.map((headerInfo) =>
+        <a href={headerInfo.link} key={headerInfo.name}>
+          {headerInfo.name}
+        </a>
+    )
   return (
-  <Sidebar
+  <AccordionNav
     {...props}
     components={components}
     sx={{
@@ -24,6 +28,8 @@ export default props => {
       pb: 4,
       mt: [64, 0],
     }}
-  />
+  >
+    {headerFragment}
+  </AccordionNav>
   )
 }

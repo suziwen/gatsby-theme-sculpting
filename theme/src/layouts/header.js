@@ -1,18 +1,13 @@
 /** @jsx jsx */
 import { jsx, Flex, useColorMode, useThemeUI } from 'theme-ui'
 import React from "react"
-import { MDXProvider } from '@mdx-js/react'
 
 import Headroom from "react-headroom"
 import MenuButton from './menu-button'
 import NavLink from './nav-link'
-import Content from '../header.mdx'
+import headers from '../header.yaml'
 import Button from './button'
 import SiteTitle from '../components/site-title'
-
-const components = {
-  a: NavLink
-}
 
 const styles = {
   alignItems: 'center',
@@ -44,6 +39,13 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
     setMode(next)
   }
 
+  const headerFragment =  headers.map((headerInfo) =>
+      <li key={headerInfo.name}>
+        <NavLink href={headerInfo.link}>
+          {headerInfo.name}
+        </NavLink>
+      </li>
+    )
   return (
         <Headroom style={{zIndex: 2}}>
           <Flex sx={styles}>
@@ -61,9 +63,9 @@ export default ({ menuOpen, setMenuOpen, nav }) => {
               display: ['none', 'block'],
               ml: 'auto'
             }}>
-              <MDXProvider components={components}>
-                <Content />
-              </MDXProvider>
+              <ul>
+                {headerFragment}
+              </ul>
             </div>
             <Button
               sx={{
