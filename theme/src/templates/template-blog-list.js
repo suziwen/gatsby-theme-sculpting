@@ -60,6 +60,7 @@ class BlogPostsIndex extends React.Component {
                 <div key={node.slug}>
                   <Heading as='h1' sx={{
                     position: 'relative',
+                    mt: 3,
                     '&:before': {
                       content: `"................................................................................................................................................."`,
                       textAlign: `right`,
