@@ -81,6 +81,7 @@ exports.createPages = async ({ graphql, actions, getNode, reporter }, pluginOpti
               createYear
               docType
               slug
+              zipPath
               tags
               updateDate
               excerpt
@@ -202,6 +203,7 @@ exports.createPages = async ({ graphql, actions, getNode, reporter }, pluginOpti
       component: blogPostTemplate,
       context: {
         slug: post.node.slug,
+        zipPath: post.node.zipPath,
         prev,
         next
       },

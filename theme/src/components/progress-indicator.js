@@ -1,6 +1,9 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { motion, useViewportScroll } from 'framer-motion'
+import {TiEdit} from "react-icons/ti"
 
 const Bar = styled(motion.div)`
   position: fixed;
@@ -40,6 +43,36 @@ const UpButton = styled.div`
   }
 `
 
+const EditorButton = styled.div`
+  cursor: pointer;
+  transition: 0.35s opacity;
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+  height: 48px;
+  width: 48px;
+  overflow: hidden;
+  z-index: 999;
+  display: none;
+  text-align: center;
+  opacity: ${props => (props.show ? '1' : '0')};
+  pointer-events: ${props => (props.show ? 'auto' : 'none')};
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    display: block;
+  }
+  .link {
+    color: ${props => props.theme.colors.text};
+    opacity: .5;
+  }
+  :hover {
+    .link {
+      color: ${props => props.theme.colors.text};
+      opacity: 1;
+    }
+  }
+`
+
+
 const SVG = styled.svg`
   #arrow {
     transition: 0.35s all;
@@ -56,7 +89,8 @@ const SVG = styled.svg`
   }
 `
 
-const ProgressIndicator = () => {
+const ProgressIndicator = (props) => {
+  const { zipFile } = props
   const { scrollYProgress } = useViewportScroll()
   const [isVisible, setIsVisible] = useState(false)
   useEffect(
@@ -71,6 +105,8 @@ const ProgressIndicator = () => {
       behavior: 'smooth',
     })
   }
+
+  const zipURL = `http://markdown.xiaoshujiang.com/#xsjzip=${encodeURIComponent(window.location.origin + props.zipFile.publicURL)}`
 
   return (
     <>
@@ -105,6 +141,11 @@ const ProgressIndicator = () => {
           />
         </SVG>
       </UpButton>
+      <EditorButton show={!isVisible} >
+        <a className="link" href={zipURL} target="_blank">
+          <TiEdit  sx={{fontSize: '2.5em', verticalAlign: 'text-bottom'}}/>
+        </a>
+      </EditorButton>
     </>
   )
 }

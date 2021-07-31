@@ -55,7 +55,9 @@ class BlogPostTemplate extends React.Component {
           </Helmet>
           <section>
             <Toc location={location} />
-            <ProgressIndicator />
+            <ProgressIndicator 
+              zipFile={this.props.data.zipFile}
+            />
             <BioLine>
               {post.updateDate}
             </BioLine>
@@ -115,7 +117,10 @@ class BlogPostTemplate extends React.Component {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostBySlug($slug: String!, $zipPath: String!) {
+    zipFile: file(absolutePath: {eq: $zipPath}){
+      publicURL
+    }
     site {
       siteMetadata {
         siteUrl
