@@ -106,7 +106,10 @@ const ProgressIndicator = (props) => {
     })
   }
 
-  const zipURL = `http://markdown.xiaoshujiang.com/#xsjzip=${encodeURIComponent(window.location.origin + props.zipFile.publicURL)}`
+  let zipURL = ''
+  if (typeof window !== 'undefined') {
+    zipURL = `http://markdown.xiaoshujiang.com/#xsjzip=${encodeURIComponent(window.location.origin + props.zipFile.publicURL)}`
+  }
 
   return (
     <>
@@ -141,11 +144,12 @@ const ProgressIndicator = (props) => {
           />
         </SVG>
       </UpButton>
-      <EditorButton show={!isVisible} >
+      {zipURL && <EditorButton show={!isVisible} >
         <a className="link" href={zipURL} target="_blank">
           <TiEdit  sx={{fontSize: '2.5em', verticalAlign: 'text-bottom'}}/>
         </a>
       </EditorButton>
+      }
     </>
   )
 }
